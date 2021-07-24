@@ -1,0 +1,22 @@
+# local source files dir
+cd GameName/
+git init
+git config --global user.email “yourname@yourdomain.com”
+git config --global user.name “YourName”
+# eo local git - now browse to remote on github.com create repository GameName
+# add the branch main 
+git remote add main git@github.com:YourName/GameName.git
+git remote set-url main git@github.com:YourName/GameName.git
+git push
+git remote show main
+# should be set in your .bashrc
+export GIT_EDITOR=vi
+echo $GIT_EDITOR 
+git status
+git config pull.rebase true
+# now goto https://github.com/YourName and create a new repository
+git pull git@github.com:YourName/GameName main
+git push -u git@github.com:YourName/GameName.git main
+git add app/src
+git commit -m "first commit"
+git pull
