@@ -7,16 +7,15 @@ git config --global user.name “YourName”
 # add the branch main 
 git remote add main git@github.com:YourName/GameName.git
 git remote set-url main git@github.com:YourName/GameName.git
-git push
-git remote show main
 # should be set in your .bashrc
 export GIT_EDITOR=vi
 echo $GIT_EDITOR 
-git status
 git config pull.rebase true
 # now goto https://github.com/YourName and create a new repository
-git pull git@github.com:YourName/GameName main
-git push -u git@github.com:YourName/GameName.git main
 git add app/src
+git status
+git push
 git commit -m "first commit"
+git push -u git@github.com:YourName/GameName.git main
+git pull git@github.com:YourName/GameName main
 git pull
