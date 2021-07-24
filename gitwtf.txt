@@ -14,8 +14,8 @@ git config pull.rebase true
 # now goto https://github.com/YourName and create a new repository
 git add app/src
 git status
-git push
 git commit -m "first commit"
+git push
 git push -u git@github.com:YourName/GameName.git main
 git pull git@github.com:YourName/GameName main
 git pull
