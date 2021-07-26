@@ -4,7 +4,7 @@ if [ -z "$1" ]
     echo "Supply a new GameName to use as argument"
     exit 1
 fi
-#cd ..
+cd ..
 if [[ ! -d GameName ]];then
     echo "Top directory, 'GameName', does not exist, abandon ship!"
     exit 1
