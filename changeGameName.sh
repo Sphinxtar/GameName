@@ -4,7 +4,7 @@ if [ -z "$1" ]
     echo "Supply a new GameName to use as argument"
     exit 1
 fi
-cd ..
+#cd ..
 if [[ ! -d GameName ]];then
     echo "Top directory, 'GameName', does not exist, abandon ship!"
     exit 1
@@ -20,6 +20,10 @@ UpList=`grep -lr GameName GameName | tr '\n' ' '`
 sed -i s/GameName/"$1"/g $UpList
 LowList=`grep -lr gamename GameName | tr '\n' ' '`
 sed -i s/gamename/"$low"/g $LowList
-mv GameName $1
-cd $1
-echo GameName is now $1
+mv GameName/app/src/main/java/com/gamename/GameNameThread.java GameName/app/src/main/java/com/${1}Thread.java
+mv GameName/app/src/main/java/com/gamename/GameNameView.java GameName/app/src/main/java/com/${1}View.java
+mv GameName/app/src/main/java/com/gamename GameName/app/src/main/java/com/${low}
+mv GameName/app/src/test/java/com/gamename GameName/app/src/test/java/com/${low}
+mv GameName/app/src/androidTest/java/com/gamename GameName/app/src/androidTest/java/com/${low}
+mv GameName ${1}
+echo "GameName is now ${1}"
