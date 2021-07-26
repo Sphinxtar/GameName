@@ -2,7 +2,6 @@ package com.gamename;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
-import android.widget.ListView;
 
 public class GameNameThread extends Thread {
     private final GameNameView gamenameView;
@@ -11,10 +10,10 @@ public class GameNameThread extends Thread {
     public static Canvas canvas;
     private double averageFPS;
 
-    public GameNameThread(SurfaceHolder surfaceHolder, GameNameView gnView) {
+    public GameNameThread(SurfaceHolder surfaceHolder, GameNameView myView) {
         super();
         this.surfaceHolder = surfaceHolder;
-        this.gamenameView = gnView;
+        this.gamenameView = myView;
     }
 
     @Override
