@@ -3,6 +3,7 @@ package com.gamename;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
+
 public class GameNameThread extends Thread {
     private final GameNameView gamenameView;
     private final SurfaceHolder surfaceHolder;
