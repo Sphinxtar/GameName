@@ -8,16 +8,6 @@ import android.graphics.Rect;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-//import android.view.View;
-//import android.content.res.Resources;
-//import android.graphics.Bitmap;
-//import android.graphics.BitmapFactory;
-//import android.graphics.Matrix;
-//import android.view.MotionEvent;
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Random;
-
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
    public final GameNameThread thread;
 
