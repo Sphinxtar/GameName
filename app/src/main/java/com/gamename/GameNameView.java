@@ -10,10 +10,12 @@ import android.graphics.Paint;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
    public final GameNameThread thread;
+   public final Racket racket;
 
     public GameNameView(Context context) {
         super(context);
         getHolder().addCallback(this);
+        racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
         setFocusable(true);
     }
