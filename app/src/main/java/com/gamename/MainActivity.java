@@ -8,8 +8,6 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	SoundManager.initSounds(this);
-	SoundManager.loadSounds(this);
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
 	setContentView(new GameNameView(this));
     }
