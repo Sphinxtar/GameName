@@ -18,9 +18,11 @@ public class Racket {
                     .setMaxStreams(Soundnum)
                     .setAudioAttributes(audioAttributes)
                     .build();
+		// add your sounds here
 		Sound[0] = SndPool.load(context, R.raw.honk, 1);
 	}
 
+	// play( sound number )
 	public void play( int noise ) {
 		SndPool.play(Sound[noise], 1, 1, 0, 0, 1);
 	}

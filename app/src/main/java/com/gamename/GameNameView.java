@@ -1,6 +1,8 @@
 package com.gamename;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.graphics.Canvas;
@@ -11,6 +13,8 @@ import android.graphics.Paint;
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
    public final GameNameThread thread;
    public final Racket racket;
+   private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+   private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
     public GameNameView(Context context) {
         super(context);
@@ -18,6 +22,13 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
         setFocusable(true);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        racket.play(0);
+        return super.onTouchEvent(event);
     }
 
     @Override
