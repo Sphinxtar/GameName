@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Window;
 
 public class MainActivity extends Activity {
-	public static Racket racket;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
