@@ -31,5 +31,4 @@ public class Racket {
 		SndPool.release();
 		SndPool = null;
 	}
-
 }

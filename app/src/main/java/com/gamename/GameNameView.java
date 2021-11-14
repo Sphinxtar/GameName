@@ -13,12 +13,14 @@ import android.graphics.Paint;
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
    public final GameNameThread thread;
    public final Racket racket;
+   public final Moodmusic moodmusic;
    private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
    private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
     public GameNameView(Context context) {
         super(context);
         getHolder().addCallback(this);
+        moodmusic = new Moodmusic(context);
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
         setFocusable(true);
@@ -28,6 +30,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public boolean onTouchEvent(MotionEvent event)
     {
         racket.play(0);
+        moodmusic.pausePlaying(getContext());
         return super.onTouchEvent(event);
     }
 
