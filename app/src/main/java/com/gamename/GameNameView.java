@@ -25,12 +25,18 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         thread = new GameNameThread(getHolder(), this);
         setFocusable(true);
     }
+    @Override
+    public boolean performClick() {
+        super.performClick();
+        racket.play(0);
+        moodmusic.pausePlaying(getContext());
+        return true;
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        racket.play(0);
-        moodmusic.pausePlaying(getContext());
+        performClick();
         return super.onTouchEvent(event);
     }
 
