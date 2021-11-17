@@ -2,24 +2,24 @@ package com.gamename;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.view.MotionEvent;
-import android.view.SurfaceView;
-import android.view.SurfaceHolder;
 import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
    public final GameNameThread thread;
    public final Racket racket;
    public final Moodmusic moodmusic;
+   public int gstate = 1;
    private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
    private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+   public Menus menu;
 
     public GameNameView(Context context) {
         super(context);
         getHolder().addCallback(this);
+        menu = new Menus(screenHeight, screenWidth);
         moodmusic = new Moodmusic(context);
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
@@ -36,6 +36,9 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if (gstate > 0 ) {
+            gstate = menu.hitButton(gstate, event);
+        }
         performClick();
         return super.onTouchEvent(event);
     }
@@ -68,14 +71,11 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public void draw(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.WHITE);
-        Rect r = new Rect(30, 30, 320, 240);
         super.draw(canvas);
-        if(canvas != null) {
+        if (gstate > 0) {
+            menu.draw(gstate, canvas);
+        } else {
             canvas.drawRGB(0, 100, 205);
-            canvas.drawRect(r, paint);
         }
     }
 
