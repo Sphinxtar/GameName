@@ -29,7 +29,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public boolean performClick() {
         super.performClick();
         racket.play(0);
-        moodmusic.pausePlaying(getContext());
+//        moodmusic.pausePlaying(getContext());
         return true;
     }
 
