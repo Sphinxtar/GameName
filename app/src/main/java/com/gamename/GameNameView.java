@@ -8,18 +8,21 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
-   public final GameNameThread thread;
-   public final Racket racket;
-   public final Moodmusic moodmusic;
-   public int gstate = 1;
-   private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-   private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-   public Menus menu;
+    public final GameNameThread thread;
+    public final Racket racket;
+    public final Moodmusic moodmusic;
+    public Menus menu;
+    public Slides slides;
+    public int gstate = 1;
+    private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    public final float scaleFactor = screenHeight / 240;
 
     public GameNameView(Context context) {
         super(context);
         getHolder().addCallback(this);
         menu = new Menus(screenHeight, screenWidth);
+        slides = new Slides(context, scaleFactor);
         moodmusic = new Moodmusic(context);
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
@@ -75,6 +78,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         if (gstate == 1) {
             menu.draw(gstate, canvas);
         } else if(gstate == 2) {
+            slides.drawSlide(canvas, 0, screenWidth );
             // canvas.drawBitmap(mybitmap, 0, 0, Paint paint);
         } else {
             canvas.drawRGB(0, 100, 205);

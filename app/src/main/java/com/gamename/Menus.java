@@ -36,7 +36,7 @@ public class Menus {
         buttons[1][1].setGcode(0);
 
         buttons[1][2] = new mybutt();
-        buttons[1][2].label = new String("Exit");
+        buttons[1][2].label = new String("Quit");
         buttons[1][2].bounds = new Rect();
         buttons[1][2].bounds.top = (ScreenHigh / 12) * 8;
         buttons[1][2].bounds.left = ScreenWide / 4;
