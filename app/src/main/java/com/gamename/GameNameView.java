@@ -75,7 +75,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         if (gstate == 1) {
             menu.draw(gstate, canvas);
         } else if(gstate == 2) {
-            canvas.drawBitmap(Bitmap bitmap, null, Rect dst, Paint paint);
+            // canvas.drawBitmap(mybitmap, 0, 0, Paint paint);
         } else {
             canvas.drawRGB(0, 100, 205);
         }
