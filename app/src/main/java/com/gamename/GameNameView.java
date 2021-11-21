@@ -13,7 +13,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public final Moodmusic moodmusic;
     public Menus menu;
     public Slides slides;
-    public int gstate = 1;
+    public int gstate = 2;
     private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     public final float scaleFactor = screenHeight / 240;
@@ -39,11 +39,27 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (gstate > 0 ) {
+        if (gstate == 0 ) {
+            // play the game
+        } else if (gstate > 0 && gstate < 2) { // it's a menu
             gstate = menu.hitButton(gstate, event);
+        } else if (gstate > 2 && gstate <6) { // it's a slide
+            gstate = slides.hitButton(gstate, event);
         }
         performClick();
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+    if (gstate == 0) { // PLAY THE GAME
+        canvas.drawRGB(0, 100, 205);
+    } else if (gstate == 1) {
+            menu.draw(gstate, canvas);
+        } else if(gstate >= 2) {
+            slides.drawSlide(canvas, gstate - 2, screenWidth, screenHeight);
+        }
     }
 
     @Override
@@ -66,22 +82,10 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             }
             retry = false;
         }
-    }
 
+    }
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        if (gstate == 1) {
-            menu.draw(gstate, canvas);
-        } else if(gstate == 2) {
-            slides.drawSlide(canvas, 0, screenWidth );
-        } else { // gstate = 0
-            canvas.drawRGB(0, 100, 205);
-        }
     }
 
     public void update() {
