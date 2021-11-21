@@ -32,7 +32,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public boolean performClick() {
         super.performClick();
         racket.play(0);
-//        moodmusic.pausePlaying(getContext());
+        moodmusic.pausePlaying(getContext());
         return true;
     }
 
@@ -79,8 +79,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             menu.draw(gstate, canvas);
         } else if(gstate == 2) {
             slides.drawSlide(canvas, 0, screenWidth );
-            // canvas.drawBitmap(mybitmap, 0, 0, Paint paint);
-        } else {
+        } else { // gstate = 0
             canvas.drawRGB(0, 100, 205);
         }
     }

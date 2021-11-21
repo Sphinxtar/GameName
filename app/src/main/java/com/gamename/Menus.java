@@ -33,7 +33,7 @@ public class Menus {
         buttons[1][1].bounds.left = ScreenWide / 4;
         buttons[1][1].bounds.bottom = buttons[1][1].bounds.top + (ScreenHigh / 12) * 2;
         buttons[1][1].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][1].setGcode(0);
+        buttons[1][1].setGcode(1);
 
         buttons[1][2] = new mybutt();
         buttons[1][2].label = new String("Quit");
@@ -42,7 +42,7 @@ public class Menus {
         buttons[1][2].bounds.left = ScreenWide / 4;
         buttons[1][2].bounds.bottom = buttons[1][2].bounds.top + (ScreenHigh / 12) * 2;
         buttons[1][2].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][2].setGcode(1);
+        buttons[1][2].setGcode(2);
     }
 
     public int hitButton(int gstate, MotionEvent event) {

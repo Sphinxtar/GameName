@@ -13,7 +13,6 @@ public class Slides {
     public int wide;
     public int high;
     public Bitmap[] slides = new Bitmap[5];
-    public Menus menu;
 
     public Slides(Context context, float scale) {
         wide = (int) (320 * scale);
@@ -30,8 +29,8 @@ public class Slides {
         slides[3] = createScaledBitmap(im, wide, high, true);
     }
 
-    public void drawSlide(Canvas canvas, int slide, int screenWide ) {
-        int offset = screenWide - wide / 2;
+    public void drawSlide(Canvas canvas, int slide, float screenWide ) {
+        int offset = (int) (screenWide - slides[slide].getWidth()) / 2;
         canvas.drawBitmap(slides[slide], offset, 0, null);
     }
 
