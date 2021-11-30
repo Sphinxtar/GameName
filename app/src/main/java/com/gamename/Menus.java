@@ -16,33 +16,32 @@ public class Menus {
         paint.setTextSize(textSize);
 
         // She watch Menu Zero - current menu/row == gcode
-        buttons[0][0] = null;
-        buttons[1][0] = new mybutt();
-        buttons[1][0].label = new String("Start");
-        buttons[1][0].bounds = new Rect();
-        buttons[1][0].bounds.top = (ScreenHigh / 12) * 2;
-        buttons[1][0].bounds.left = ScreenWide / 4;
-        buttons[1][0].bounds.bottom = buttons[1][0].bounds.top + (ScreenHigh / 12) * 2;
-        buttons[1][0].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][0].setGcode(0);
+        buttons[0][0] = new mybutt();
+        buttons[0][0].label = new String("Start");
+        buttons[0][0].bounds = new Rect();
+        buttons[0][0].bounds.top = (ScreenHigh / 12) * 2;
+        buttons[0][0].bounds.left = ScreenWide / 4;
+        buttons[0][0].bounds.bottom = buttons[0][0].bounds.top + (ScreenHigh / 12) * 2;
+        buttons[0][0].bounds.right = ScreenWide - (ScreenWide / 4);
+        buttons[0][0].setGcode(0);
 
-        buttons[1][1] = new mybutt();
-        buttons[1][1].label = new String("Help");
-        buttons[1][1].bounds = new Rect();
-        buttons[1][1].bounds.top = (ScreenHigh / 12) * 5;
-        buttons[1][1].bounds.left = ScreenWide / 4;
-        buttons[1][1].bounds.bottom = buttons[1][1].bounds.top + (ScreenHigh / 12) * 2;
-        buttons[1][1].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][1].setGcode(1);
+        buttons[0][1] = new mybutt();
+        buttons[0][1].label = new String("Help");
+        buttons[0][1].bounds = new Rect();
+        buttons[0][1].bounds.top = (ScreenHigh / 12) * 5;
+        buttons[0][1].bounds.left = ScreenWide / 4;
+        buttons[0][1].bounds.bottom = buttons[0][1].bounds.top + (ScreenHigh / 12) * 2;
+        buttons[0][1].bounds.right = ScreenWide - (ScreenWide / 4);
+        buttons[0][1].setGcode(3);
 
-        buttons[1][2] = new mybutt();
-        buttons[1][2].label = new String("Quit");
-        buttons[1][2].bounds = new Rect();
-        buttons[1][2].bounds.top = (ScreenHigh / 12) * 8;
-        buttons[1][2].bounds.left = ScreenWide / 4;
-        buttons[1][2].bounds.bottom = buttons[1][2].bounds.top + (ScreenHigh / 12) * 2;
-        buttons[1][2].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][2].setGcode(2);
+        buttons[0][2] = new mybutt();
+        buttons[0][2].label = new String("Quit");
+        buttons[0][2].bounds = new Rect();
+        buttons[0][2].bounds.top = (ScreenHigh / 12) * 8;
+        buttons[0][2].bounds.left = ScreenWide / 4;
+        buttons[0][2].bounds.bottom = buttons[0][2].bounds.top + (ScreenHigh / 12) * 2;
+        buttons[0][2].bounds.right = ScreenWide - (ScreenWide / 4);
+        buttons[0][2].setGcode(2);
     }
 
     public int hitButton(int gstate, MotionEvent event) {

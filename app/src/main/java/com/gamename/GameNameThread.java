@@ -24,7 +24,7 @@ public class GameNameThread extends Thread {
         long waitTime;
         long totalTime = 0;
         int frameCount =0;
-        int targetFPS = 30;
+        int targetFPS = 18; // it's 1980 again
         long targetTime = 1000/ targetFPS;
 
         while(running) {

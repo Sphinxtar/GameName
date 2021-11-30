@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.SurfaceHolder;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
     public final GameNameThread thread;
@@ -26,13 +26,14 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         moodmusic = new Moodmusic(context);
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
+//        moodmusic.pausePlaying(getContext());
         setFocusable(true);
     }
+
     @Override
     public boolean performClick() {
         super.performClick();
         racket.play(0);
-        moodmusic.pausePlaying(getContext());
         return true;
     }
 
@@ -40,11 +41,11 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public boolean onTouchEvent(MotionEvent event)
     {
         if (gstate == 0 ) {
-            // play the game
+            // playing the game
         } else if (gstate > 0 && gstate < 2) { // it's a menu
-            gstate = menu.hitButton(gstate, event);
-        } else if (gstate > 2 && gstate <6) { // it's a slide
-            gstate = slides.hitButton(gstate, event);
+            gstate = menu.hitButton(gstate - 1, event);
+        } else if (gstate >= 2 && gstate < 6) { // it's a slide
+            gstate = slides.hitButton(gstate - 2, event);
         }
         performClick();
         return super.onTouchEvent(event);
@@ -53,12 +54,14 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-    if (gstate == 0) { // PLAY THE GAME
-        canvas.drawRGB(0, 100, 205);
-    } else if (gstate == 1) {
-            menu.draw(gstate, canvas);
-        } else if(gstate >= 2) {
-            slides.drawSlide(canvas, gstate - 2, screenWidth, screenHeight);
+        if (canvas != null) {
+            if (gstate == 0) { // PLAY THE GAME
+                canvas.drawRGB(0, 100, 205);
+            } else if (gstate > 0 && gstate < 2) {
+                menu.draw(gstate - 1, canvas);
+            } else if (gstate >= 2) {
+                slides.drawSlide(canvas, gstate - 2, screenWidth, screenHeight);
+            }
         }
     }
 
@@ -82,12 +85,13 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             }
             retry = false;
         }
-
     }
+
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
     }
 
     public void update() {
+        // game logic here
     }
 }
