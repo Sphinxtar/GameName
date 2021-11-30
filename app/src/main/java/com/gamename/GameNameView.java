@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.view.View;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
     public final GameNameThread thread;
@@ -48,6 +49,9 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             gstate = slides.hitButton(gstate - 2, event);
         }
         performClick();
+        if (gstate == -1) {
+            System.exit(0);
+        }
         return super.onTouchEvent(event);
     }
 

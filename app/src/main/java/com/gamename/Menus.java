@@ -41,7 +41,7 @@ public class Menus {
         buttons[0][2].bounds.left = ScreenWide / 4;
         buttons[0][2].bounds.bottom = buttons[0][2].bounds.top + (ScreenHigh / 12) * 2;
         buttons[0][2].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[0][2].setGcode(2);
+        buttons[0][2].setGcode(5);
     }
 
     public int hitButton(int gstate, MotionEvent event) {

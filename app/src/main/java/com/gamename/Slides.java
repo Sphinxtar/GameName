@@ -39,7 +39,7 @@ public class Slides {
         im = decodeResource(context.getResources(), R.drawable.gbye, options);
         slides[3] = new slide();
         slides[3].bm = createScaledBitmap(im, wide, high, true);
-        slides[3].setGcode(0);
+        slides[3].setGcode(-1);
     }
 
     public int hitButton(int slidenum, MotionEvent motionEvent) {
