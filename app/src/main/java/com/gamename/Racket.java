@@ -19,7 +19,7 @@ public class Racket {
                     .setAudioAttributes(audioAttributes)
                     .build();
 		// add your sounds here
-		Sound[0] = SndPool.load(context, R.raw.honk, 1);
+		Sound[0] = SndPool.load(context, R.raw.click, 1);
 	}
 
 	// play( sound number )

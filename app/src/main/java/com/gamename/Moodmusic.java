@@ -7,7 +7,7 @@ public class Moodmusic {
     private static MediaPlayer mediaplayer = null;
 
     public Moodmusic(Context context) {
-        mediaplayer = MediaPlayer.create(context, R.raw.fishsong);
+        mediaplayer = MediaPlayer.create(context, R.raw.moodmusic);
         mediaplayer.setLooping(true);
         startPlaying(context);
     }
