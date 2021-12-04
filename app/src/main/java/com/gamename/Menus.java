@@ -32,7 +32,7 @@ public class Menus {
         buttons[0][1].bounds.left = ScreenWide / 4;
         buttons[0][1].bounds.bottom = buttons[0][1].bounds.top + (ScreenHigh / 12) * 2;
         buttons[0][1].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[0][1].setGcode(3);
+        buttons[0][1].setGcode(4);
 
         buttons[0][2] = new mybutt();
         buttons[0][2].label = new String("Quit");
@@ -41,22 +41,21 @@ public class Menus {
         buttons[0][2].bounds.left = ScreenWide / 4;
         buttons[0][2].bounds.bottom = buttons[0][2].bounds.top + (ScreenHigh / 12) * 2;
         buttons[0][2].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[0][2].setGcode(5);
+        buttons[0][2].setGcode(6);
     }
 
-    public int hitButton(int gstate, MotionEvent event) {
-        int retval = gstate;
+    public int hitButton(int menu, MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-        for (int i = 0; i < buttons[gstate].length; i++) {
-            if (buttons[gstate][i].bounds.contains(x, y)) {
-               retval = buttons[gstate][i].getGcode();
+        for (int i = 0; i < buttons[menu].length; i++) {
+            if (buttons[menu][i].bounds.contains(x, y)) {
+               return(buttons[menu][i].getGcode());
             }
         }
-        return(retval);
+        return(menu);
     }
 
-    public void draw(int gstate, Canvas canvas) {
+    public void draw( Canvas canvas, int gstate ){
         if(canvas != null && buttons[gstate][0] != null ) {
             canvas.drawRGB(0, 100, 105);
             for (int i = 0; i < buttons[gstate].length; i++) {

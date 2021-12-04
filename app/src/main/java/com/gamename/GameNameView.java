@@ -14,7 +14,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public final Moodmusic moodmusic;
     public Menus menu;
     public Slides slides;
-    public int gstate = 2;
+    public int gstate = 3; // splash
     private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     public final float scaleFactor = screenHeight / 240;
@@ -43,10 +43,10 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     {
         if (gstate == 0 ) {
             // playing the game
-        } else if (gstate > 0 && gstate < 2) { // it's a menu
-            gstate = menu.hitButton(gstate - 1, event);
-        } else if (gstate >= 2 && gstate < 6) { // it's a slide
-            gstate = slides.hitButton(gstate - 2, event);
+        } else if (gstate > 0 && gstate <= 2) { // it's a menu
+            gstate = menu.hitButton(gstate -1, event);
+        } else if (gstate > 2) { // it's a slide
+            gstate = slides.hitButton(gstate - 3, event);
         }
         performClick();
         if (gstate == -1) {
@@ -61,10 +61,10 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         if (canvas != null) {
             if (gstate == 0) { // PLAY THE GAME
                 canvas.drawRGB(0, 100, 205);
-            } else if (gstate > 0 && gstate < 2) {
-                menu.draw(gstate - 1, canvas);
-            } else if (gstate >= 2) {
-                slides.drawSlide(canvas, gstate - 2, screenWidth, screenHeight);
+            } else if (gstate > 0 && gstate <= 2) {
+                menu.draw(canvas, gstate - 1);
+            } else if (gstate > 2) {
+                slides.drawSlide(canvas, gstate - 3, screenWidth, screenHeight);
             }
         }
     }
