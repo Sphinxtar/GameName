@@ -52,7 +52,7 @@ public class Menus {
                return(buttons[menu][i].getGcode());
             }
         }
-        return(menu);
+        return(menu+1);
     }
 
     public void draw( Canvas canvas, int gstate ){
