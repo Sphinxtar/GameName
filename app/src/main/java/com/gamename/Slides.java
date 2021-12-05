@@ -13,7 +13,7 @@ public class Slides {
 
     public int wide;
     public int high;
-    public slide slides[] = new slide[4];
+    public slide[] slides = new slide[4];
 
     public Slides(Context context, float scale) {
         wide = (int) (320 * scale);
@@ -42,11 +42,11 @@ public class Slides {
         slides[3].setGcode(-1);
     }
 
-    public int hitButton(int slidenum, MotionEvent motionEvent) {
+    public int hitButton(int slidenum) {
         return(slides[slidenum].getGcode());
     }
 
-    public void drawSlide(Canvas canvas, int slidenum, float screenWide, float screenHigh ) {
+    public void drawSlide(Canvas canvas, int slidenum, float screenWide, float screenHigh) {
         int left = (int) (screenWide - slides[slidenum].bm.getWidth()) / 2;
         int top = (int) (screenHigh - slides[slidenum].bm.getHeight()) / 2;
         canvas.drawBitmap(slides[slidenum].bm, left, top, null);
