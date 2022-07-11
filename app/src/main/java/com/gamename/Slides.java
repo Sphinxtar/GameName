@@ -42,9 +42,9 @@ public class Slides {
         slides[3].setGcode(-1);
     }
 
-    public int hitButton(int slidenum,MotionEvent evebt) {
+    public int hitButton(int slidenum, MotionEvent event) {
 
-        return(slides[slidenum].getGcode());
+        return slides[slidenum].getGcode();
     }
 
     public void drawSlide(Canvas canvas, int slidenum, float screenWide, float screenHigh) {
