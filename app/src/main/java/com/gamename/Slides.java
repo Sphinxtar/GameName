@@ -42,7 +42,8 @@ public class Slides {
         slides[3].setGcode(-1);
     }
 
-    public int hitButton(int slidenum) {
+    public int hitButton(int slidenum,MotionEvent evebt) {
+
         return(slides[slidenum].getGcode());
     }
 
