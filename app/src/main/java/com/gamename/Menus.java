@@ -17,7 +17,7 @@ public class Menus {
 
         // She watch Menu Zero - current menu/row == gcode
         buttons[0][0] = new mybutt();
-        buttons[0][0].label = new String("Start");
+        buttons[0][0].label = "Start";
         buttons[0][0].bounds = new Rect();
         buttons[0][0].bounds.top = (ScreenHigh / 12) * 2;
         buttons[0][0].bounds.left = ScreenWide / 4;
@@ -26,7 +26,7 @@ public class Menus {
         buttons[0][0].setGcode(0);
 
         buttons[0][1] = new mybutt();
-        buttons[0][1].label = new String("Help");
+        buttons[0][1].label = "Help";
         buttons[0][1].bounds = new Rect();
         buttons[0][1].bounds.top = (ScreenHigh / 12) * 5;
         buttons[0][1].bounds.left = ScreenWide / 4;
@@ -35,7 +35,7 @@ public class Menus {
         buttons[0][1].setGcode(4);
 
         buttons[0][2] = new mybutt();
-        buttons[0][2].label = new String("Quit");
+        buttons[0][2].label = "Quit";
         buttons[0][2].bounds = new Rect();
         buttons[0][2].bounds.top = (ScreenHigh / 12) * 8;
         buttons[0][2].bounds.left = ScreenWide / 4;
