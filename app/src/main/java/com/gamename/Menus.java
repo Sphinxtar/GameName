@@ -7,9 +7,9 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 public class Menus {
-    private Paint paint = new Paint();
-    private mybutt[][] buttons = new mybutt[2][3];
-    private int textSize;
+    final private Paint paint = new Paint();
+    final private mybutt[][] buttons = new mybutt[2][3];
+    final private int textSize;
 
     public Menus(int ScreenHigh, int ScreenWide){
         textSize = (ScreenHigh / 12);
@@ -77,9 +77,9 @@ public class Menus {
 
     private void drawCenter(Canvas canvas, Paint paint, Rect r, String text) {
         paint.setTextAlign(Paint.Align.CENTER);
-        float x = r.left + ((r.right - r.left) / 2);
-        float y = r.top + ((r.bottom - r.top) / 2);
-        canvas.drawText(text, x, y + textSize / 2, paint);
+        float x = r.left + (float) ((r.right - r.left) / 2);
+        float y = r.top + (float) ((r.bottom - r.top) / 2);
+        canvas.drawText(text, x, y + (float) textSize / 2, paint);
     }
 
 
@@ -96,5 +96,4 @@ public class Menus {
             return gcode;
         }
     }
-
 }

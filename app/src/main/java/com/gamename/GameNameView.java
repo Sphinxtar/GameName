@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
-import android.view.View;
+// import android.view.View;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
     public final GameNameThread thread;
@@ -17,7 +17,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public int gstate = 3; // splash
     private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-    public final float scaleFactor = screenHeight / 240;
+    public final float scaleFactor = (float) (screenHeight / 240);
 
     public GameNameView(Context context) {
         super(context);
@@ -41,7 +41,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (gstate == 0 ) {
+        if (gstate == 0) {
             // playing the game
         } else if (gstate > 0 && gstate <= 2) { // it's a menu
             gstate = menu.hitButton(gstate -1, event);

@@ -13,7 +13,7 @@ public class Slides {
 
     public int wide;
     public int high;
-    public slide slides[] = new slide[4];
+    public slide[] slides = new slide[4];
 
     public Slides(Context context, float scale) {
         wide = (int) (320 * scale);
