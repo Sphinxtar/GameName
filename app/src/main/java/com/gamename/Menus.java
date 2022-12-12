@@ -124,7 +124,7 @@ public class Menus {
 
     private void drawCenter(Canvas canvas, Paint paint, Rect r, String text) {
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setStrokeWidth(8);
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         float x = r.left + (float) ((r.right - r.left) / 2);
         float y = r.top + (float) ((r.bottom - r.top) / 2);
         canvas.drawText(text, x, y + (float) textSize / 3, paint);
