@@ -1,8 +1,10 @@
 package com.gamename;
 
 import android.content.Context;
-import android.content.res.Resources;
+  // import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
@@ -15,8 +17,13 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public Menus menu;
     public Slides slides;
     public int gstate = 3; // splash
-    private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-    private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+   /**
+    * private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+    * private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    */
+   DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
+    private final int screenHeight = displaymetrics.heightPixels;
+    private final int screenWidth = displaymetrics.widthPixels;
     public final float scaleFactor = (float) (screenHeight / 240);
 
     public GameNameView(Context context) {
@@ -27,7 +34,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         moodmusic = new Moodmusic(context);
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
-//        moodmusic.pausePlaying(getContext());
+        moodmusic.pausePlaying(getContext());
         setFocusable(true);
     }
 
@@ -41,17 +48,21 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        int newstate = 0;
         if (gstate == 0) {
             // playing the game
-        } else if (gstate > 0 && gstate <= 2) { // it's a menu
-            gstate = menu.hitButton(gstate -1, event);
-        } else if (gstate > 2) { // it's a slide
-            gstate = slides.hitButton(gstate - 3, event);
+        } else if (gstate == 1) { // it's menu 1
+            newstate = menu.hitButton(0, event);
+        } else if (gstate == 2) { // it's menu 2
+            newstate = menu.hitButton(1, event);
+        } else if (gstate > 2) { // must be a slide
+            newstate = slides.hitButton(gstate - 3, event);
         }
         performClick();
-        if (gstate == -1) {
+        if (gstate < 0 ) {
             System.exit(0);
         }
+        gstate = newstate;
         return super.onTouchEvent(event);
     }
 

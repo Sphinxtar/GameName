@@ -3,8 +3,7 @@
      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
      android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
  -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gamename">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="false"
