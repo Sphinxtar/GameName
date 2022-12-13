@@ -4,7 +4,7 @@ import android.content.Context;
   // import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
-import android.util.Log;
+// import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
@@ -51,11 +51,9 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         int newstate = 0;
         if (gstate == 0) {
             // playing the game
-        } else if (gstate == 1) { // it's menu 1
-            newstate = menu.hitButton(0, event);
-        } else if (gstate == 2) { // it's menu 2
-            newstate = menu.hitButton(1, event);
-        } else if (gstate > 2) { // must be a slide
+        } else if (gstate == 1) { // menu 1
+            newstate = menu.hitButton(event);
+        } else if (gstate > 2) { // slide
             newstate = slides.hitButton(gstate - 3, event);
         }
         performClick();
@@ -73,7 +71,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             if (gstate == 0) { // PLAY THE GAME
                 canvas.drawRGB(0, 100, 205);
             } else if (gstate > 0 && gstate <= 2) {
-                menu.draw(canvas, gstate - 1);
+                menu.draw(canvas);
             } else if (gstate > 2) {
                 slides.drawSlide(canvas, gstate - 3, screenWidth, screenHeight);
             }

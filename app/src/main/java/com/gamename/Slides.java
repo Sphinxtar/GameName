@@ -34,12 +34,12 @@ public class Slides {
         im = decodeResource(context.getResources(), R.drawable.help2, options);
         slides[2] = new slide();
         slides[2].bm = createScaledBitmap(im, wide, high, true);
-        slides[2].setGcode(2); // take you back to main menu 1
+        slides[2].setGcode(1); // take you back to main menu 1
 
         im = decodeResource(context.getResources(), R.drawable.topten, options);
         slides[3] = new slide();
         slides[3].bm = createScaledBitmap(im, wide, high, true);
-        slides[3].setGcode(2); // take you back to main menu 1
+        slides[3].setGcode(1); // take you back to main menu 1
 
         im = decodeResource(context.getResources(), R.drawable.gbye, options);
         slides[4] = new slide();
