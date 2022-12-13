@@ -14,7 +14,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public Menus menu;
     public Slides slides;
     public int gstate = 3; // splash
-    public DisplayMetrics displaymetrics;
+    DisplayMetrics displaymetrics;
 
     public GameNameView(Context context) {
         super(context);

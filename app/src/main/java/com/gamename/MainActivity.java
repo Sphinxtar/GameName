@@ -26,5 +26,4 @@ public class MainActivity extends Activity {
 		hideSystemBars();
 		setContentView(new GameNameView(this));
     }
-
 }
