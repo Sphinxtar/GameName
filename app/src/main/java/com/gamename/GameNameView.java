@@ -1,14 +1,11 @@
 package com.gamename;
 
 import android.content.Context;
-  // import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
-// import android.view.View;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
     public final GameNameThread thread;
@@ -17,20 +14,14 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public Menus menu;
     public Slides slides;
     public int gstate = 3; // splash
-   /**
-    * private final int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-    * private final int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-    */
-   DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
-    private final int screenHeight = displaymetrics.heightPixels;
-    private final int screenWidth = displaymetrics.widthPixels;
-    public final float scaleFactor = (float) (screenHeight / 240);
+    public DisplayMetrics displaymetrics;
 
     public GameNameView(Context context) {
         super(context);
         getHolder().addCallback(this);
-        menu = new Menus(screenHeight, screenWidth);
-        slides = new Slides(context, scaleFactor);
+        displaymetrics = getResources().getDisplayMetrics();
+        menu = new Menus(displaymetrics.heightPixels, displaymetrics.widthPixels);
+        slides = new Slides(context, displaymetrics.heightPixels );
         moodmusic = new Moodmusic(context);
         racket = new Racket(context);
         thread = new GameNameThread(getHolder(), this);
@@ -51,12 +42,10 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         int newstate = 0;
         if (gstate == 0) {
             // playing the game
-        } else if (gstate == 1) { // it's menu 1
-            newstate = menu.hitButton(0, event);
-        } else if (gstate == 2) { // it's menu 2
-            newstate = menu.hitButton(1, event);
-        } else if (gstate > 2) { // must be a slide
-            newstate = slides.hitButton(gstate - 3, event);
+        } else if (gstate == 1) { // menu 1
+            newstate = menu.hitButton(event);
+        } else if (gstate > 2) { // slide
+            newstate = slides.hitButton(gstate - 3);
         }
         performClick();
         if (gstate < 0 ) {
@@ -73,9 +62,9 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             if (gstate == 0) { // PLAY THE GAME
                 canvas.drawRGB(0, 100, 205);
             } else if (gstate > 0 && gstate <= 2) {
-                menu.draw(canvas, gstate - 1);
+                menu.draw(canvas);
             } else if (gstate > 2) {
-                slides.drawSlide(canvas, gstate - 3, screenWidth, screenHeight);
+                slides.drawSlide(canvas, gstate - 3, displaymetrics.widthPixels, displaymetrics.heightPixels);
             }
         }
     }
