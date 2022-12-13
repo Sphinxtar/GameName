@@ -7,19 +7,17 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.view.MotionEvent;
 
 public class Slides {
 
-    public int wide;
-    public int high;
     public slide[] slides = new slide[5];
 
-    public Slides(Context context, float scale) {
-        wide = (int) (320 * scale);
-        high = (int) (240 * scale);
+    public Slides(Context context, float height) {
+        float sratio = height / 240;
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = true;
+        int wide = (int) (320 * sratio);
+        int high = (int) (240 * sratio);
 
         Bitmap im = decodeResource(context.getResources(), R.drawable.splash, options);
         slides[0] = new slide();
@@ -47,14 +45,14 @@ public class Slides {
         slides[4].setGcode(-1);
     }
 
-    public int hitButton(int slidenum, MotionEvent event) {
+    public int hitButton(int slidenum) {
 
         return slides[slidenum].getGcode();
     }
 
-    public void drawSlide(Canvas canvas, int slidenum, float screenWide, float screenHigh) {
-        int left = (int) (screenWide - slides[slidenum].bm.getWidth()) / 2;
-        int top = (int) (screenHigh - slides[slidenum].bm.getHeight()) / 2;
+    public void drawSlide(Canvas canvas, int slidenum, int screenWide, int screenHigh) {
+        int left = (screenWide - slides[slidenum].bm.getWidth()) / 2;
+        int top = (screenHigh - slides[slidenum].bm.getHeight()) / 2;
         canvas.drawBitmap(slides[slidenum].bm, left, top, null);
     }
 
