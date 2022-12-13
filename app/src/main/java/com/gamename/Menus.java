@@ -41,7 +41,7 @@ public class Menus {
         buttons[0][2].bounds.left = ScreenWide / 4;
         buttons[0][2].bounds.bottom = buttons[0][2].bounds.top + (ScreenHigh / 12) * 2;
         buttons[0][2].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[0][2].setGcode(6);
+        buttons[0][2].setGcode(7);
 
         buttons[1][0] = new mybutt();
         buttons[1][0].label = "Back";
@@ -59,7 +59,7 @@ public class Menus {
         buttons[1][1].bounds.left = ScreenWide / 4;
         buttons[1][1].bounds.bottom = buttons[1][1].bounds.top + (ScreenHigh / 16) * 2;
         buttons[1][1].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][1].setGcode(2);
+        buttons[1][1].setGcode(4);
 
         buttons[1][2] = new mybutt();
         buttons[1][2].label = "Top Ten";
@@ -68,7 +68,7 @@ public class Menus {
         buttons[1][2].bounds.left = ScreenWide / 4;
         buttons[1][2].bounds.bottom = buttons[1][2].bounds.top + (ScreenHigh / 16) * 2;
         buttons[1][2].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][2].setGcode(4);
+        buttons[1][2].setGcode(6);
 
         buttons[1][3] = new mybutt();
         buttons[1][3].label = "Quit";
@@ -77,7 +77,7 @@ public class Menus {
         buttons[1][3].bounds.left = ScreenWide / 4;
         buttons[1][3].bounds.bottom = buttons[1][3].bounds.top + (ScreenHigh / 16) * 2;
         buttons[1][3].bounds.right = ScreenWide - (ScreenWide / 4);
-        buttons[1][3].setGcode(6);
+        buttons[1][3].setGcode(7);
     }
 
     public int hitButton(int menunum, MotionEvent event) {

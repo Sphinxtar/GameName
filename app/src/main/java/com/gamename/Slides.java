@@ -13,7 +13,7 @@ public class Slides {
 
     public int wide;
     public int high;
-    public slide[] slides = new slide[4];
+    public slide[] slides = new slide[5];
 
     public Slides(Context context, float scale) {
         wide = (int) (320 * scale);
@@ -36,10 +36,15 @@ public class Slides {
         slides[2].bm = createScaledBitmap(im, wide, high, true);
         slides[2].setGcode(2); // take you back to main menu 1
 
-        im = decodeResource(context.getResources(), R.drawable.gbye, options);
+        im = decodeResource(context.getResources(), R.drawable.topten, options);
         slides[3] = new slide();
         slides[3].bm = createScaledBitmap(im, wide, high, true);
-        slides[3].setGcode(-1);
+        slides[3].setGcode(2); // take you back to main menu 1
+
+        im = decodeResource(context.getResources(), R.drawable.gbye, options);
+        slides[4] = new slide();
+        slides[4].bm = createScaledBitmap(im, wide, high, true);
+        slides[4].setGcode(-1);
     }
 
     public int hitButton(int slidenum, MotionEvent event) {
