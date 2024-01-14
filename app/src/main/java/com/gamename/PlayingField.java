@@ -1,9 +1,8 @@
 package com.gamename;
 
-import android.app.Activity;
-import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.view.WindowMetrics;
+import android.util.Log;
 
 
 public class PlayingField {
@@ -12,44 +11,52 @@ public class PlayingField {
     public int canvasHigh;
     public int canvasWide;
     public int scalefactor;
-    // canvas edge to vport edge width
-    public int topmargin;
-    public int sidemargin;
-    // game viewport
-    public Rect vport;
-    // display port
-    public WindowMetrics dport;
-    // location of viewport upper left corner in canvas
-    public int top;
-    public int left;
-    // virtual playing field size
-    public int high;
-    public int wide;
+    private int topmargin;
+    private int sidemargin;
+    // display port = canvas size
+    public final Rect dport;
+    // view into dport
+    public final Rect vport;
 
-    public PlayingField(Context context) {
+    public PlayingField() {
+        scalefactor = 1;
+        canvasWide = 0;
+        canvasHigh = 0;
+        setSidemargin(0);
+        setTopmargin(0);
+        dport = new Rect();
         vport = new Rect();
-        dport = ((Activity) context).getWindowManager().getMaximumWindowMetrics();
-        canvasHigh = dport.getBounds().bottom;
-        canvasWide = dport.getBounds().right;
-        scalefactor = canvasHigh / 240;
-        high = scalefactor * 240;
-        wide = (scalefactor + 1) * 320;
-        topmargin = (canvasHigh - high) / 2;
-        sidemargin = (canvasWide - wide) / 2;
-        top = topmargin;
-        left = sidemargin;
-        setVport(left, top, wide, high);
+    }
+
+    public void setScaleFactor(Canvas canvas)
+    {
+        String TAG = "PF INIT";
+        dport.left  = 0;
+        dport.top = 0;
+        dport.right = canvas.getWidth();
+        dport.bottom = canvas.getHeight();
+        scalefactor = dport.bottom / 240;
+        int wide = scalefactor * 320;
+        int high = scalefactor * 240;
+        setSidemargin((dport.right - wide) / 2);
+        setTopmargin((dport.bottom - high) / 2);
+        setVport(getSidemargin(), getTopmargin(), wide + getSidemargin(), high + getTopmargin());
+        Log.i(TAG, "dport: " + dport.toString() + " vport: " + vport.toString() );
     }
 
     public void setVport(int left, int top, int right, int bottom) {
-        this.vport.left = left;
-        this.vport.top = top;
-        this.vport.right = right;
-        this.vport.bottom = bottom;
+        vport.left = left;
+        vport.top = top;
+        vport.right = right;
+        vport.bottom = bottom;
     }
 
     public Rect getVport() {
         return vport;
+    }
+
+    public boolean changed(Canvas canvas) {
+        return canvasHigh != canvas.getHeight() || canvasWide != canvas.getWidth();
     }
 
     public int getVportLeft() {
@@ -60,11 +67,27 @@ public class PlayingField {
         return vport.top;
     }
 
+    public int getVportRight() {
+        return vport.right;
+    }
+
     public int getVportBottom() {
         return vport.bottom;
     }
 
-    public int getVportRight() {
-        return vport.right;
+    public int getSidemargin() {
+        return sidemargin;
+    }
+
+    public void setSidemargin(int sidemargin) {
+        this.sidemargin = sidemargin;
+    }
+
+    public int getTopmargin() {
+        return topmargin;
+    }
+
+    public void setTopmargin(int topmargin) {
+        this.topmargin = topmargin;
     }
 }

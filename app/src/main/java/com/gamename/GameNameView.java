@@ -2,30 +2,40 @@ package com.gamename;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.DisplayMetrics;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+/*
+ import android.util.DisplayMetrics;
+ import android.view.Display;
+ import android.view.WindowManager;
+ import android.util.Log;
+ import android.graphics.Point;
+*/
+import androidx.annotation.NonNull;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
     public final GameNameThread thread;
     public final Racket racket;
     public final Moodmusic moodmusic;
+    public final PlayingField pf;
     public Menus menu;
     public Slides slides;
     public int gstate = 3; // splash
-    DisplayMetrics displaymetrics;
+    private Context ctext;
+    // DisplayMetrics displayMetrics;
 
     public GameNameView(Context context) {
         super(context);
+        setCtext(context);
         getHolder().addCallback(this);
-        displaymetrics = getResources().getDisplayMetrics();
-        menu = new Menus(displaymetrics.heightPixels, displaymetrics.widthPixels);
-        slides = new Slides(context, displaymetrics.heightPixels );
+        pf = new PlayingField();
         moodmusic = new Moodmusic(context);
-        racket = new Racket(context);
+        racket = new Racket(getCtext());
         thread = new GameNameThread(getHolder(), this);
-        moodmusic.pausePlaying(getContext());
+        moodmusic.pausePlaying(getCtext());
         setFocusable(true);
     }
 
@@ -41,6 +51,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     {
         int newstate = 0;
         if (gstate == 0) {
+            System.out.println(".");
             // playing the game
         } else if (gstate == 1) { // menu 1
             newstate = menu.hitButton(event);
@@ -49,35 +60,46 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         }
         performClick();
         if (gstate < 0 ) {
-            System.exit(0);
+            thread.setRunning(false);
+            System.exit(1);
+        } else {
+            gstate = newstate;
         }
-        gstate = newstate;
         return super.onTouchEvent(event);
     }
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
         if (canvas != null) {
+            super.draw(canvas);
+            if (pf.changed(canvas)) {
+                pf.setScaleFactor(canvas);
+                menu = new Menus( pf.getSidemargin(), pf.getTopmargin(),pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
+                slides = new Slides(getCtext(), pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
+            }
+//        Log.i(TAG, "draw: " + high + " x " + wide);
             if (gstate == 0) { // PLAY THE GAME
-                canvas.drawRGB(0, 100, 205);
+                Paint p = new Paint();
+                p.setColor(Color.RED);
+                p.setStyle(Paint.Style.STROKE);
+                canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
             } else if (gstate > 0 && gstate <= 2) {
                 menu.draw(canvas);
             } else if (gstate > 2) {
-                slides.drawSlide(canvas, gstate - 3, displaymetrics.widthPixels, displaymetrics.heightPixels);
+                slides.drawSlide(canvas, gstate - 3, pf.getVportLeft(), pf.getVportTop());
             }
         }
     }
 
     @Override
-    public void surfaceCreated(SurfaceHolder holder) {
+    public void surfaceCreated(@NonNull SurfaceHolder holder) {
 //        makeLevel();
         thread.setRunning(true);
         thread.start();
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
+    public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         boolean retry = true;
         while (retry) {
             try {
@@ -92,10 +114,18 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
     }
 
     public void update() {
         // game logic here
+    }
+
+    public Context getCtext() {
+        return ctext;
+    }
+
+    public void setCtext(Context ctext) {
+        this.ctext = ctext;
     }
 }

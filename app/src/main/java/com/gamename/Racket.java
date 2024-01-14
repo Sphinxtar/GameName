@@ -24,7 +24,7 @@ public class Racket {
 
 	// play( sound number )
 	public void play( int noise ) {
-		SndPool.play(Sound[noise], 1, 1, 0, 0, 1);
+		SndPool.play(Sound[noise], (float) 0.5, (float) 0.5, 0, 0, 1);
 	}
 
 	protected void onDestroy() {

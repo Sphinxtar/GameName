@@ -5,11 +5,12 @@ import android.view.SurfaceHolder;
 
 
 public class GameNameThread extends Thread {
-    private final GameNameView gamenameView;
-    private final SurfaceHolder surfaceHolder;
-    private boolean running;
+
+    public final SurfaceHolder surfaceHolder;
     public static Canvas canvas;
-    private double averageFPS;
+    private final GameNameView gamenameView;
+    private boolean running;
+ //   private double averageFPS;
 
     public GameNameThread(SurfaceHolder surfaceHolder, GameNameView myView) {
         super();
