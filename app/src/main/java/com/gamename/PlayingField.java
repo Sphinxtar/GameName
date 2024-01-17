@@ -2,7 +2,7 @@ package com.gamename;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
+// import android.util.Log;
 
 
 public class PlayingField {
@@ -14,9 +14,9 @@ public class PlayingField {
     private int topmargin;
     private int sidemargin;
     // display port = canvas size
-    public final Rect dport;
+    public Rect dport;
     // view into dport
-    public final Rect vport;
+    public Rect vport;
 
     public PlayingField() {
         scalefactor = 1;
@@ -30,18 +30,20 @@ public class PlayingField {
 
     public void setScaleFactor(Canvas canvas)
     {
-        String TAG = "PF INIT";
+//        String TAG = "PF INIT";
+        canvasWide = canvas.getWidth();
+        canvasHigh = canvas.getHeight();
         dport.left  = 0;
         dport.top = 0;
-        dport.right = canvas.getWidth();
-        dport.bottom = canvas.getHeight();
+        dport.right = canvasWide;
+        dport.bottom = canvasHigh;
         scalefactor = dport.bottom / 240;
         int wide = scalefactor * 320;
         int high = scalefactor * 240;
         setSidemargin((dport.right - wide) / 2);
         setTopmargin((dport.bottom - high) / 2);
         setVport(getSidemargin(), getTopmargin(), wide + getSidemargin(), high + getTopmargin());
-        Log.i(TAG, "dport: " + dport.toString() + " vport: " + vport.toString() );
+//        Log.i(TAG, "dport: " + dport.toString() + " vport: " + vport.toString() );
     }
 
     public void setVport(int left, int top, int right, int bottom) {
@@ -51,14 +53,14 @@ public class PlayingField {
         vport.bottom = bottom;
     }
 
+
+    public boolean changed(Canvas canvas) {
+        return !((canvasHigh == canvas.getHeight()) && (canvasWide == canvas.getWidth()));
+    }
+
     public Rect getVport() {
         return vport;
     }
-
-    public boolean changed(Canvas canvas) {
-        return canvasHigh != canvas.getHeight() || canvasWide != canvas.getWidth();
-    }
-
     public int getVportLeft() {
         return vport.left;
     }

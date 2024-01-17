@@ -70,20 +70,24 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public void draw(Canvas canvas) {
+        Paint p = new Paint();
         if (canvas != null) {
             super.draw(canvas);
             if (pf.changed(canvas)) {
                 pf.setScaleFactor(canvas);
-                menu = new Menus( pf.getSidemargin(), pf.getTopmargin(),pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
+                menu = new Menus( pf.getSidemargin(), pf.getTopmargin() + 10,pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
                 slides = new Slides(getCtext(), pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
             }
 //        Log.i(TAG, "draw: " + high + " x " + wide);
             if (gstate == 0) { // PLAY THE GAME
-                Paint p = new Paint();
                 p.setColor(Color.RED);
                 p.setStyle(Paint.Style.STROKE);
                 canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
             } else if (gstate > 0 && gstate <= 2) {
+                p.setColor(Color.YELLOW);
+                p.setStyle(Paint.Style.FILL);
+                canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
+                slides.drawSlide(canvas, 5, pf.getVportLeft(), pf.getVportTop());
                 menu.draw(canvas);
             } else if (gstate > 2) {
                 slides.drawSlide(canvas, gstate - 3, pf.getVportLeft(), pf.getVportTop());

@@ -2,20 +2,15 @@ package com.gamename;
 
 import static android.graphics.Bitmap.createScaledBitmap;
 import static android.graphics.BitmapFactory.decodeResource;
-
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.util.Log;
 //import android.util.Log;
 
 public class Slides {
 
-    public final slide[] slides = new slide[5];
+    public final slide[] slides = new slide[6];
 
     public Slides(Context context, int Wide, int High) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -40,7 +35,6 @@ public class Slides {
 
         im = decodeResource(context.getResources(), R.drawable.topten, options);
         slides[3] = new slide();
-
         slides[3].bm = createScaledBitmap(im, Wide, High, true);
         slides[3].setGcode(1); // take you back to main menu 1
 
@@ -48,6 +42,11 @@ public class Slides {
         slides[4] = new slide();
         slides[4].bm = createScaledBitmap(im, Wide, High, true);
         slides[4].setGcode(-1);
+
+        im = decodeResource(context.getResources(), R.drawable.menu, options);
+        slides[5] = new slide();
+        slides[5].bm = createScaledBitmap(im, Wide, High, true);
+        slides[5].setGcode(1);
     }
 
     public int hitButton(int slidenum) {

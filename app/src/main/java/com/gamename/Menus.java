@@ -12,9 +12,9 @@ public class Menus {
     private final int textSize;
 
     public Menus(int Left, int Top, int Wide, int High){
-        textSize = High / 12;
-        paint.setTextSize(textSize);
         int space = 2;
+        textSize = High / 16;
+        paint.setTextSize(textSize);
 
         buttons[0] = new mybutt();
         buttons[0].label = "Start The Game";
@@ -69,14 +69,13 @@ public class Menus {
 
     public void draw(Canvas canvas){
         if(canvas != null) {
-            canvas.drawRGB(0, 100, 105);
             for (mybutt button : buttons) {
                 paint.setStyle(Paint.Style.FILL);
                 paint.setColor(Color.LTGRAY);
                 canvas.drawRect(button.bounds, paint);
 
                 paint.setStyle(Paint.Style.STROKE);
-                paint.setColor(Color.BLACK);
+                paint.setColor(Color.DKGRAY);
                 paint.setStrokeWidth(12);
                 canvas.drawLine(button.bounds.left,
                         button.bounds.bottom,
