@@ -7,13 +7,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
-/*
- import android.util.DisplayMetrics;
- import android.view.Display;
- import android.view.WindowManager;
  import android.util.Log;
- import android.graphics.Point;
-*/
 import androidx.annotation.NonNull;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -21,11 +15,13 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public final Racket racket;
     public final Moodmusic moodmusic;
     public final PlayingField pf;
+    public Dpad dpad;
     public Menus menu;
     public Slides slides;
     public int gstate = 3; // splash
     private Context ctext;
     // DisplayMetrics displayMetrics;
+    private static final String TAG = "GAMENAMSTYLE";
 
     public GameNameView(Context context) {
         super(context);
@@ -47,18 +43,18 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         int newstate = 0;
-        if (gstate == 0) {
-            System.out.println(".");
-            // playing the game
+        if (gstate == 0) {  // playing the game
+            if (dpad.hitButton(event) > 0)
+                newstate = 1;
         } else if (gstate == 1) { // menu 1
             newstate = menu.hitButton(event);
+            performClick();
         } else if (gstate > 2) { // slide
             newstate = slides.hitButton(gstate - 3);
+            performClick();
         }
-        performClick();
         if (gstate < 0 ) {
             thread.setRunning(false);
             System.exit(1);
@@ -75,14 +71,17 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             super.draw(canvas);
             if (pf.changed(canvas)) {
                 pf.setScaleFactor(canvas);
+                dpad = new Dpad(pf.getVport());
                 menu = new Menus( pf.getSidemargin(), pf.getTopmargin() + 10,pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
                 slides = new Slides(getCtext(), pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
             }
-//        Log.i(TAG, "draw: " + high + " x " + wide);
+        Log.i(TAG, pf.toString());
             if (gstate == 0) { // PLAY THE GAME
                 p.setColor(Color.RED);
                 p.setStyle(Paint.Style.STROKE);
+                p.setStrokeWidth(4);
                 canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
+                dpad.draw(canvas);
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
                 p.setStyle(Paint.Style.FILL);
