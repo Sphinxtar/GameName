@@ -59,7 +59,7 @@ public class Dpad {
         dpadbutt[8].bounds = new Rect();
         dpadbutt[8].setRection(9);
         dpadbutt[8].setBounds(dpadbutt[2].getLeft(), dpadbutt[6].getTop(), dpadbutt[2].getRight(), dpadbutt[6].getBottom());
-    // abxy
+    // a b x y
         dpadbutt[9] = new dpadbutts();
         dpadbutt[9].bounds = new Rect();
         dpadbutt[9].setRection(10); // '0xA'
