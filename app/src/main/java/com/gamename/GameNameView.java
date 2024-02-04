@@ -15,13 +15,15 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public final Racket racket;
     public final Moodmusic moodmusic;
     public final PlayingField pf;
+    public Sprite pix;
     public Dpad dpad;
     public Menus menu;
     public Slides slides;
+    public Player player;
     public int gstate = 3; // splash
     private Context ctext;
     // DisplayMetrics displayMetrics;
-    private static final String TAG = "GAMENAMSTYLE";
+//    private static final String TAG = "GAMENAMSTYLE";
 
     public GameNameView(Context context) {
         super(context);
@@ -74,14 +76,16 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 dpad = new Dpad(pf.getVport());
                 menu = new Menus( pf.getSidemargin(), pf.getTopmargin() + 10,pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
                 slides = new Slides(getCtext(), pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
+                pix = new Sprite(getCtext(), pf);
+                player = new Player(pf);
             }
-        Log.i(TAG, pf.toString());
             if (gstate == 0) { // PLAY THE GAME
                 p.setColor(Color.RED);
                 p.setStyle(Paint.Style.STROKE);
                 p.setStrokeWidth(4);
                 canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
                 dpad.draw(canvas);
+                pix.drawCenterSprite(canvas, player.sprite,player.spot.getX()+pf.getVportLeft(), player.spot.getY()+pf.getVportTop());
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
                 p.setStyle(Paint.Style.FILL);
