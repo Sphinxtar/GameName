@@ -22,8 +22,6 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public Player player;
     public int gstate = 3; // splash
     private Context ctext;
-    // DisplayMetrics displayMetrics;
-//    private static final String TAG = "GAMENAMSTYLE";
 
     public GameNameView(Context context) {
         super(context);
@@ -47,9 +45,21 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int newstate = 0;
+        int button = 0;
         if (gstate == 0) {  // playing the game
-            if (dpad.hitButton(event) > 0)
-                newstate = 1;
+            button = dpad.hitButton(event);
+            if (button > 0 && button < 10)
+                player.setDirection(button);
+            else if (button == 10) //BLUE
+                player.setSprite(0);
+            else if (button == 11) // GREEN
+                player.setSprite(3);
+            else if (button == 12) // RED
+                player.setSprite(1);
+            else if (button == 13) // YELLOW
+                player.setSprite(2);
+            else if (button == 14)
+                newstate = 1; // back to menu 1
         } else if (gstate == 1) { // menu 1
             newstate = menu.hitButton(event);
             performClick();
@@ -60,6 +70,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         if (gstate < 0 ) {
             thread.setRunning(false);
             System.exit(1);
+            performClick();
         } else {
             gstate = newstate;
         }
@@ -100,7 +111,6 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
-//        makeLevel();
         thread.setRunning(true);
         thread.start();
     }

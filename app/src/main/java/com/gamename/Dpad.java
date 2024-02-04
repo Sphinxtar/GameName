@@ -62,22 +62,22 @@ public class Dpad {
     // a b x y
         dpadbutt[9] = new dpadbutts();
         dpadbutt[9].bounds = new Rect();
-        dpadbutt[9].setRection(10); // '0xA'
+        dpadbutt[9].setRection(10);
         dpadbutt[9].setBounds(vport.right + (bsize * 2), vport.top + bsize, vport.right + (bsize * 3), vport.top + (bsize * 2));
 
         dpadbutt[10] = new dpadbutts();
         dpadbutt[10].bounds = new Rect();
-        dpadbutt[10].setRection(11); // '0xA'
+        dpadbutt[10].setRection(11);
         dpadbutt[10].setBounds(dpadbutt[9].getLeft() - bsize, dpadbutt[9].getTop() + bsize, dpadbutt[9].getLeft(), dpadbutt[9].getBottom() + bsize);
 
         dpadbutt[11] = new dpadbutts();
         dpadbutt[11].bounds = new Rect();
-        dpadbutt[11].setRection(11);
+        dpadbutt[11].setRection(12);
         dpadbutt[11].setBounds(dpadbutt[9].getRight(), dpadbutt[9].getBottom(), dpadbutt[9].getRight() + bsize, dpadbutt[9].getBottom() + bsize);
 
         dpadbutt[12] = new dpadbutts();
         dpadbutt[12].bounds = new Rect();
-        dpadbutt[12].setRection(12);
+        dpadbutt[12].setRection(13);
         dpadbutt[12].setBounds(dpadbutt[10].getRight(), dpadbutt[10].getBottom(), dpadbutt[11].getLeft(), dpadbutt[10].getBottom() + bsize);
     }
 
