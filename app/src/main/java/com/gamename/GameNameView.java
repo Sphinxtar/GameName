@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Region;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -96,11 +95,16 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
             if (gstate == 0) { // PLAY THE GAME
                 p.setColor(Color.LTGRAY);
                 p.setStyle(Paint.Style.STROKE);
-                p.setStrokeWidth(4);
+                p.setStrokeWidth(6);
                 canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
                 dpad.draw(canvas);
-                canvas.clipRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), Region.Op.INTERSECT);
+
+                // canvas.clipRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), Region.Op.INTERSECT);
+                canvas.save();
+                canvas.clipRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom());
                 pix.drawCenterSprite(canvas, player.sprite, player.spot.getX(), player.spot.getY());
+                canvas.restore();
+
                 player.adjustPlayer(pf);
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
