@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Region;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.SurfaceHolder;
- import android.util.Log;
+import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 public class GameNameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -45,11 +45,14 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int newstate = 0;
-        int button = 0;
         if (gstate == 0) {  // playing the game
-            button = dpad.hitButton(event);
-            if (button > 0 && button < 10)
+            int button = dpad.hitButton(event);
+            if (button > 0 && button < 10) { // dpad hit
                 player.setDirection(button);
+                if (button == 5)
+                    player.setSpeed(player.getSpeed() - 1); // deceleration
+                else player.setSpeed(16);
+            }
             else if (button == 10) //BLUE
                 player.setSprite(0);
             else if (button == 11) // GREEN
@@ -91,12 +94,14 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 player = new Player(pf);
             }
             if (gstate == 0) { // PLAY THE GAME
-                p.setColor(Color.RED);
+                p.setColor(Color.LTGRAY);
                 p.setStyle(Paint.Style.STROKE);
                 p.setStrokeWidth(4);
                 canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
                 dpad.draw(canvas);
-                pix.drawCenterSprite(canvas, player.sprite,player.spot.getX()+pf.getVportLeft(), player.spot.getY()+pf.getVportTop());
+                canvas.clipRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), Region.Op.INTERSECT);
+                pix.drawCenterSprite(canvas, player.sprite, player.spot.getX(), player.spot.getY());
+                player.adjustPlayer(pf);
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
                 p.setStyle(Paint.Style.FILL);

@@ -1,20 +1,17 @@
 package com.gamename;
-/**
- * load a bitmap and cut it into an array of smaller bitmaps according to a text file in assets
- * draw them where specified by index and center coordinates
+/*
+  load a bitmap and cut it into an array of smaller bitmaps according to a text file in assets
+  draw them where specified by index and center coordinates
  */
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import static android.graphics.Bitmap.createScaledBitmap;
 import static android.graphics.BitmapFactory.decodeResource;
-
 import androidx.annotation.NonNull;
 
 public class Sprite {
@@ -31,14 +28,13 @@ public class Sprite {
             int y;
             int wide;
             int high;
-            int spritenum = 0;
             Bitmap im = null; // intermediate bitmap for scaling
-            BitmapFactory.Options options = null;
-            Bitmap SpriteSheet = decodeResource(context.getResources(), R.drawable.sprites, options);
+            Bitmap SpriteSheet = decodeResource(context.getResources(), R.drawable.sprites, null);
             String line;
             String[] words;
             InputStream in = context.getAssets().open("sprites");
             reader = new BufferedReader(new InputStreamReader(in));
+            int spritenum = 0;
             while ((line = reader.readLine()) != null) {
                 if (line.isEmpty()) {
                     continue;
@@ -50,8 +46,7 @@ public class Sprite {
                     wide = (Short.parseShort(words[3]));
                     high = (Short.parseShort(words[4]));
                     im = Bitmap.createBitmap(SpriteSheet, x, y, wide, high );
-                    sprites[spritenum] = createScaledBitmap(im, (int)(wide * scaling), (int)(high * scaling), true);
-                    spritenum++;
+                    sprites[spritenum++] = createScaledBitmap(im, (int)(wide * scaling), (int)(high * scaling), true);
                 }
             }
             in.close();
@@ -63,11 +58,11 @@ public class Sprite {
             ioe.printStackTrace();
         }
     }
-
+/*
     public void drawSprite(@NonNull Canvas canvas, int sprite, int column, int row ) {
         canvas.drawBitmap(sprites[sprite], row, column, null);
     }
-
+*/
     public void drawCenterSprite(@NonNull Canvas canvas, int sprite, int column, int row ) {
         int top = (row - (sprites[sprite].getHeight() / 2));
         int left = (column - (sprites[sprite].getWidth() / 2));
