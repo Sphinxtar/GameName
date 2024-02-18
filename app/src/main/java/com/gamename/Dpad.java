@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 public class Dpad {
-    public dpadbutts[] dpadbutt = new dpadbutts[13];
+    public dpadbutts[] dpadbutt = new dpadbutts[14];
     final private Paint paint = new Paint();
     public Dpad(Rect vport) {
 
@@ -79,6 +79,12 @@ public class Dpad {
         dpadbutt[12].bounds = new Rect();
         dpadbutt[12].setRection(13);
         dpadbutt[12].setBounds(dpadbutt[10].getRight(), dpadbutt[10].getBottom(), dpadbutt[11].getLeft(), dpadbutt[10].getBottom() + bsize);
+
+        dpadbutt[13] = new dpadbutts();
+        dpadbutt[13].bounds = new Rect();
+        dpadbutt[13].setRection(14);
+        dpadbutt[13].setBounds(dpadbutt[12].getLeft(), dpadbutt[12].getBottom() + (bsize * 2), dpadbutt[12].getRight(), dpadbutt[12].getBottom() + (bsize * 3));
+
     }
 
     public int hitButton(MotionEvent event) {
@@ -146,6 +152,13 @@ public class Dpad {
             cy = dpadbutt[12].getBounds().exactCenterY();
             radius = (float)dpadbutt[12].getBounds().width() / 2;
             canvas.drawCircle(cx, cy, radius, paint);
+
+            paint.setColor(Color.LTGRAY);
+            paint.setStrokeWidth(shadowidth);
+            canvas.drawLine(dpadbutt[13].bounds.left, dpadbutt[13].bounds.top + shadowidth, dpadbutt[13].bounds.right, dpadbutt[13].bounds.top + shadowidth, paint);
+            canvas.drawLine(dpadbutt[13].bounds.left, dpadbutt[13].bounds.top + shadowidth * 5, dpadbutt[13].bounds.right, dpadbutt[13].bounds.top + shadowidth * 5, paint);
+            canvas.drawLine(dpadbutt[13].bounds.left, dpadbutt[13].bounds.top + shadowidth * 9, dpadbutt[13].bounds.right, dpadbutt[13].bounds.top + shadowidth * 9, paint);
+            canvas.drawLine(dpadbutt[13].bounds.left, dpadbutt[13].bounds.top + shadowidth * 13, dpadbutt[13].bounds.right, dpadbutt[13].bounds.top + shadowidth * 13, paint);
         }
     }
 

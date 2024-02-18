@@ -1,6 +1,15 @@
 // left top wide high
-q,0,0,32,32,  // 0 blue square
-q,33,0,32,32, // 1 red square
-q,66,0,32,32, // 2 yellow square
-q,99,0,32,32, // 3 green square
-
+q,0,0,32,32,     // 0 blue square
+q,32,0,32,32,    // 1 red square
+q,96,0,32,32,    // 2 green square
+q,64,0,32,32,    // 3 yellow square
+q,128,0,16,16,   // 4 orange ball
+q,144,0,16,12,   // 5 orange ball vertical squish
+q,128,16,16,8,   // 6 orange ball vertical squished
+q,184,0,12,16,   // 7 orange ball horizontal squish
+q,176,0,8,16,    // 8 orange ball horizontal squished
+q,160,8,16,16,   // 9 purple ball
+q,144,12,16,12,  // 11 purple ball vertical squish
+q,160,0,16,8,    // 12 purple ball vertical squished
+q,184,16,12,16,  // 13 purple ball horizontal squish
+q,176,16,8,16,   // 14 purple ball horizontal squished

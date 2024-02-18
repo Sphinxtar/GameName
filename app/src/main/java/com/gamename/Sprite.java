@@ -15,7 +15,7 @@ import static android.graphics.BitmapFactory.decodeResource;
 import androidx.annotation.NonNull;
 
 public class Sprite {
-    private final Bitmap[] sprites = new Bitmap[5]; // array of sprites cut and scaled
+    private final Bitmap[] sprites = new Bitmap[15]; // array of sprites cut and scaled
 
     public Sprite( Context context, PlayingField pf ) {
         loadSprites(context, pf.scalefactor);
@@ -46,7 +46,7 @@ public class Sprite {
                     wide = (Short.parseShort(words[3]));
                     high = (Short.parseShort(words[4]));
                     im = Bitmap.createBitmap(SpriteSheet, x, y, wide, high );
-                    sprites[spritenum++] = createScaledBitmap(im, (int)(wide * scaling), (int)(high * scaling), true);
+                    sprites[spritenum++] = createScaledBitmap(im, wide * scaling, high * scaling, true);
                 }
             }
             in.close();
