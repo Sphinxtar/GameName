@@ -1,0 +1,11 @@
+// these are the inital values for the arrays of NPC to clone in the game as needed
+// type is to key off custom code in collisions, special effects etc
+// state is initially alive, dead, stunned, zombie whatever is significant
+// coordinates are in the virtual world, blank for random
+// direction according to keypad 1..9 - 0 fixed
+// tts - time to spin how many frames before it picks a new random direction
+// respawn - frames until rebirth or 0 for stay dead
+// birth life and death are 0,1,2,3... animation frames references in the bitmap array
+// sounds values are indexes into the virtual harmonica - interval is pause between repeat
+// type:state:x,y  :rection:tts:respawn:birth:life:death:birthsound:lifesound,interval:deathrattle:
+1      :1    :60,80:3        :16 :8    :
