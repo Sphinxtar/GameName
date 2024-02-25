@@ -13,12 +13,13 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     public final GameNameThread thread;
     public final Racket racket;
     public final Moodmusic moodmusic;
-    public final PlayingField pf;
+    public PlayingField pf;
     public Sprite pix;
     public Dpad dpad;
     public Menus menu;
     public Slides slides;
     public Player player;
+    public Npc npc;
     public int gstate = 3; // splash
     private Context ctext;
 
@@ -37,7 +38,6 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean performClick() {
         super.performClick();
-        racket.play(0);
         return true;
     }
 
@@ -50,7 +50,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 player.setDirection(button);
                 if (button == 5)
                     player.setSpeed(player.getSpeed() - 1); // deceleration
-                else player.setSpeed(16);
+                else player.setSpeed(8);
             }
             else if (button == 10) //BLUE
                 player.setSprite(0);
@@ -65,14 +65,15 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         } else if (gstate == 1) { // menu 1
             newstate = menu.hitButton(event);
             performClick();
-        } else if (gstate > 2) { // slide
+            racket.play(Dragon.getRandom(0,6));
+        } else if (gstate > 2) { // slides
             newstate = slides.hitButton(gstate - 3);
             performClick();
+            racket.play(0);
         }
         if (gstate < 0 ) {
             thread.setRunning(false);
-            System.exit(1);
-            performClick();
+            System.exit(0);
         } else {
             gstate = newstate;
         }
@@ -91,6 +92,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 slides = new Slides(getCtext(), pf.getVportRight() - pf.getVportLeft(), pf.getVportBottom() - pf.getVportTop());
                 pix = new Sprite(getCtext(), pf);
                 player = new Player(pf);
+                npc = new Npc(getCtext(), pf);
             }
             if (gstate == 0) { // PLAY THE GAME
                 p.setColor(Color.LTGRAY);
@@ -100,9 +102,12 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 dpad.draw(canvas);
                 canvas.save();
                 canvas.clipRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom());
-                pix.drawCenterSprite(canvas, player.sprite, player.spot.getX(), player.spot.getY());
+                for(Npc.Bot b : npc.bots)
+                    pix.drawCenterSprite(canvas, b.sprite, b.spot.x, b.spot.y);
+                pix.drawCenterSprite(canvas, player.sprite, player.spot.x, player.spot.y);
                 canvas.restore();
                 player.adjustPlayer(pf);
+                npc.collisions();
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
                 p.setStyle(Paint.Style.FILL);

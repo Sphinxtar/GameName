@@ -13,3 +13,11 @@ q,144,12,16,12,  // 11 purple ball vertical squish
 q,160,0,16,8,    // 12 purple ball vertical squished
 q,184,16,12,16,  // 13 purple ball horizontal squish
 q,176,16,8,16,   // 14 purple ball horizontal squished
+q,196,0,14,16,   // 15 orange ball 45 squish
+q,210,0,14,14,   // 16 orange ball 45 squished
+q,238,0,14,14,   // 17 orange ball 270 squish
+q,224,0,14,14,   // 18 orange ball 270 squished
+q,196,16,14,16,  // 19 purple ball 45 squish
+q,210,16,14,14,  // 20 purple ball 45 squished
+q,238,16,14,16,  // 21 purple ball 270 squish
+q,224,16,14,14,  // 22 purple ball 270 squished

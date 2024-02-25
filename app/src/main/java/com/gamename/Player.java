@@ -1,12 +1,14 @@
 package com.gamename;
 
+import android.graphics.Point;
+
 public class Player {
 
     int sprite;
     int speed;
     int direction;
     int score;
-    Spot spot;
+    Point spot;
 
     /**
      * x is vertical y is horizontal center of player sprite
@@ -18,55 +20,55 @@ public class Player {
         score = 0;
         final int x = (pf.getVport().width() / 2) + pf.getVportLeft();
         final int y = (pf.getVport().height() / 2) + pf.getVportTop();
-        spot = new Spot(x,y);
+        spot = new Point(x,y);
     }
 
     public void adjustPlayer(PlayingField pf) {
-        int x = spot.getX();
-        int y = spot.getY();
+        int x = spot.x;
+        int y = spot.y;
         if (speed > 0) {
             switch (direction){
                 case 1:
                     if ((x - speed) > pf.getVportLeft())
-                        spot.setX(x - speed);
+                        spot.x = x - speed;
                     if ((y - speed) > pf.getVportTop())
-                        spot.setY(y - speed);
+                        spot.y = y - speed;
                     break;
                 case 2:
                     if ((y - speed) > pf.getVportTop())
-                        spot.setY(y - speed);
+                        spot.y = y - speed;
                     break;
                 case 3:
                     if ((y - speed) > pf.getVportTop())
-                        spot.setY(y - speed);
+                        spot.y = y - speed;
                     if ((x + speed) < pf.getVportRight())
-                        spot.setX(x + speed);
+                        spot.x = x + speed;
                     break;
                 case 4:
                     if ((x - speed) > pf.getVportLeft())
-                        spot.setX(x - speed);
+                        spot.x = x - speed;
                     break;
                 case 5:
                     break;
                 case 6:
                     if ((x + speed) < pf.getVportRight())
-                        spot.setX(x + speed);
+                        spot.x = x + speed;
                     break;
                 case 7:
                     if ((x - speed) > pf.getVportLeft())
-                        spot.setX(x - speed);
+                        spot.x = x - speed;
                     if ((y + speed) < pf.getVportBottom())
-                        spot.setY(y + speed);
+                        spot.y = y + speed;
                     break;
                 case 8:
                     if ((y + speed) < pf.getVportBottom())
-                        spot.setY(y + speed);
+                        spot.y = y + speed;
                     break;
                 case 9:
                     if ((y + speed) < pf.getVportBottom())
-                        spot.setY(y + speed);
+                        spot.y = y + speed;
                     if ((x + speed) < pf.getVportRight())
-                        spot.setX(x + speed);
+                        spot.x = x + speed;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + direction);

@@ -15,7 +15,7 @@ import static android.graphics.BitmapFactory.decodeResource;
 import androidx.annotation.NonNull;
 
 public class Sprite {
-    private final Bitmap[] sprites = new Bitmap[15]; // array of sprites cut and scaled
+    private final Bitmap[] sprites = new Bitmap[23]; // array of sprites cut and scaled
 
     public Sprite( Context context, PlayingField pf ) {
         loadSprites(context, pf.scalefactor);

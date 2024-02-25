@@ -4,9 +4,14 @@ import java.util.Random;
 
 public class Dragon {
 
-    static Random random = new Random();
+    private static final Random random;
 
-    public static int getRandom(int r) {
-        return random.nextInt(r);
+    static {
+        random = new Random();
     }
+
+    public static int getRandom(int low, int high) {
+        return random.nextInt(high - low + 1) + low;
+    }
+
 }
