@@ -8,21 +8,21 @@
 // sprite is current animation frame reference in the bitmap array
 // sounds values are indexes into the virtual harmonica - interval is pause between repeat
 // example:
-// n:type:state:x,y  :rection:tts:respawn:sprite:birthsound:lifesound,interval:deathrattle:
-// n:1   :0    :60,80:3      :16 :8      :6     :3         :5,10              :10         :
+// n:type:state:x,y  :rection:speed:tts:respawn:sprite:birthsound:lifesound,interval:deathrattle:
+// n:0   :0    :40,40:0      :6  :20     :4     :0         :0,20              :0          gf :
 // four balls of type 0, direction 0 will be filled by random
-n:0:0:40,40:0:6:20:4:0:0,20:0:
-n:0:0:280,40:0:6:20:4:0:0,20:0:
-n:0:0:40,200:0:6:20:4:0:0,20:0:
-n:0:0:280,200:0:6:20:4:0:0,20:0:
+n:0:0:40,40:0:4:6:20:4:0:0,20:0:
+n:0:0:280,40:0:4:6:20:4:0:0,20:0:
+n:0:0:40,200:0:4:6:20:4:0:0,20:0:
+n:0:0:280,200:0:4:6:20:4:0:0,20:0:
 // zones where the sprite changes according to states orange or purple left,top,right,bottom,spritenumber,spritenumber"
 z:20:20:300:220:4:9:     // 0 center field, round
 z:8:20:20:220:7:13:      // 1 left horizontal squish
-z:20:8:300:20:5:11:       // 2 top vertical squish
-z:300:20:312:220:7:13:    // 3 right horizontal squish
+z:20:8:300:20:5:11:      // 2 top vertical squish
+z:300:20:312:220:7:13:   // 3 right horizontal squish
 z:20:220:300:232:5:11:   // 4 bottom vertical squish
 z:0:8:8:232:8:14:        // 5 left horizontal squished
-z:8:0:300:8:6:12:        // 6 top vertical squished
+z:8:0:312:8:6:12:        // 6 top vertical squished
 z:312:8:320:232:8:14:    // 7 right horizontal squished
 z:8:232:312:240:6:12:    // 8 bottom vertical squished
 z:8:8:20:20:15:19:       // 9 top left corner 45 squish

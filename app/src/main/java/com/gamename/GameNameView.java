@@ -107,7 +107,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 pix.drawCenterSprite(canvas, player.sprite, player.spot.x, player.spot.y);
                 canvas.restore();
                 player.adjustPlayer(pf);
-                npc.collisions();
+                npc.collisions(pf);
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
                 p.setStyle(Paint.Style.FILL);

@@ -61,14 +61,15 @@ public class Npc {
                     else
                         bots[botnum].setRection(Dragon.getRandom(6, 9));
                 }
-                bots[botnum].setTts(Integer.parseInt(words[5]));
-                bots[botnum].setRespawn(Integer.parseInt(words[6]));
-                bots[botnum].setSprite(Integer.parseInt(words[7]));
-                bots[botnum].setBirthsound(Integer.parseInt(words[8]));
-                woids = words[9].split(",");
+                bots[botnum].setSpeed(Integer.parseInt(words[5]));
+                bots[botnum].setTts(Integer.parseInt(words[6]));
+                bots[botnum].setRespawn(Integer.parseInt(words[7]));
+                bots[botnum].setSprite(Integer.parseInt(words[8]));
+                bots[botnum].setBirthsound(Integer.parseInt(words[9]));
+                woids = words[10].split(",");
                 bots[botnum].setLifesound(Integer.parseInt(woids[0]));
                 bots[botnum].setInterval(Integer.parseInt(woids[1]));
-                bots[botnum].setDeathrattle(Integer.parseInt(words[10]));
+                bots[botnum].setDeathrattle(Integer.parseInt(words[11]));
                 botnum++;
             }
             if (words[0]. equals("z")) {
@@ -91,18 +92,102 @@ public class Npc {
         }
     }
 
-    public void collisions() {
+    public void collisions(PlayingField pf) {
+        int zonenum = 0;
+        int r;
         for(Zone z : zones) {
             for(Bot b : bots) {
                 if (z.area.contains(b.spot.x, b.spot.y)) {
-                    b.sprite = z.sprite[b.state];
+                    b.setSprite(z.sprite[b.state]);
+                    switch(zonenum) {
+                        case 5: // left vertical
+                            b.setRection(Dragon.getRandom(1,3) * 3);
+                            break;
+                        case 6: // top horizontal
+                            b.setRection(Dragon.getRandom(7,9));
+                            break;
+                        case 7: // right vertical
+                            r = Dragon.getRandom(1,3);
+                            if (r == 1)
+                                b.setRection(1);
+                            else if (r == 2)
+                                b.setRection(4);
+                            else if (r == 3)
+                                b.setRection(7);
+                            break;
+                        case 8: // bottom horizontal
+                            b.setRection(Dragon.getRandom(1,3));
+                            break;
+                        case 13: // top left corner
+                            b.setRection(9);
+                            break;
+                        case 14: // top right corner
+                            b.setRection(7);
+                            break;
+                        case 15: // bottom right corner
+                            b.setRection(1);
+                            break;
+                        case 16: // bottom left corner
+                            b.setRection(3);
+                        default:
+                            break;
+                    }
                 }
-           }
+                if (b.speed > 0) {
+                    switch (b.rection){
+                        case 1:
+                            if ((b.spot.x - b.speed) > pf.getVportLeft())
+                                b.spot.x -= b.speed;
+                            if ((b.spot.y - b.speed) > pf.getVportTop())
+                                b.spot.y -= b.speed;
+                            break;
+                        case 2:
+                            if ((b.spot.y - b.speed) > pf.getVportTop())
+                                b.spot.y -= b.speed;
+                            break;
+                        case 3:
+                            if ((b.spot.y - b.speed) > pf.getVportTop())
+                                b.spot.y -= b.speed;
+                            if ((b.spot.x + b.speed) < pf.getVportRight())
+                                b.spot.x += b.speed;
+                            break;
+                        case 4:
+                            if ((b.spot.x - b.speed) > pf.getVportLeft())
+                                b.spot.x -= b.speed;
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            if ((b.spot.x + b.speed) < pf.getVportRight())
+                                b.spot.x += b.speed;
+                            break;
+                        case 7:
+                            if ((b.spot.x - b.speed) > pf.getVportLeft())
+                                b.spot.x -= b.speed;
+                            if ((b.spot.y + b.speed) < pf.getVportBottom())
+                                b.spot.y += b.speed;
+                            break;
+                        case 8:
+                            if ((b.spot.y + b.speed) < pf.getVportBottom())
+                                b.spot.y += b.speed;
+                            break;
+                        case 9:
+                            if ((b.spot.y + b.speed) < pf.getVportBottom())
+                                b.spot.y += b.speed;
+                            if ((b.spot.x + b.speed) < pf.getVportRight())
+                                b.spot.x += b.speed;
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + b.rection);
+                    }
+                }
+            }
+            zonenum++;
         }
     }
 
-    private static class Zone {
-        private Rect area;
+    public static class Zone {
+        public Rect area;
         private final int[] sprite;
         {
             sprite = new int[2];
