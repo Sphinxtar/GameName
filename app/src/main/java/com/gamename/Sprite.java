@@ -6,6 +6,8 @@ package com.gamename;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +18,7 @@ import androidx.annotation.NonNull;
 
 public class Sprite {
     private final Bitmap[] sprites = new Bitmap[23]; // array of sprites cut and scaled
-
+    private Rect[] bounce = new Rect[12];
     public Sprite( Context context, PlayingField pf ) {
         loadSprites(context, pf.scalefactor);
     }

@@ -1,0 +1,20 @@
+// strike zones where the cube smacks a ball based on 
+// left,top,right,bottom from the center player x,y and sprite to change to,state
+// outer
+z:-36:-24:-24:24:22:13:1:   // 0 left side squish
+z:-36:-36:-24:-24:-24:19:1: // 1 left top 45 squish
+z:-24:-36:24:24:11:1: 	    // 2 top vertical squish
+z:24:-36:36:-24:21:1:       // 3 top right 270 squish 
+z:24:-24:36:24:13:1:        // 4 right horizontal squish
+z:24:24:36:36:19:1:         // 5 right bottom 45 squish
+z:-24:24:24:36:11:1:        // 6 bottom squish
+z:-36:24:-24:36:21:1:       // 7 left bottom 270 squish
+// inner
+z:-24:-16:-16:16:14:1:      // 8 left side squished
+z:-24:-24:-16:-16:20:1:     // 9 left top 45 squished
+z:-16:-24:16:-16:12:1:      // 10 top vertical squished
+z:16:-24:-16:24:22:1:       // 11 top right 270 squished
+z:-16:16:24:16:14:1:        // 12 right horizontal squished
+z:16:16:24:24:19:1:         // 13 right bottom 45 squished
+z:-16:16:16:24:12:1:        // 14 bottom squished
+z:-24:16:-16:24:22:1:       // 15 left bottom 270 squished
