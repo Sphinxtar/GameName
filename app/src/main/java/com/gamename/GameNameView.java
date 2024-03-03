@@ -109,9 +109,6 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 player.adjustPlayer(pf);
                 npc.collisions(pf, player.getHotz());
             } else if (gstate > 0 && gstate <= 2) {
-                p.setColor(Color.YELLOW);
-                p.setStyle(Paint.Style.FILL);
-                canvas.drawRect(pf.getVportLeft(), pf.getVportTop(), pf.getVportRight(), pf.getVportBottom(), p);
                 slides.drawSlide(canvas, 5, pf.getVportLeft(), pf.getVportTop());
                 menu.draw(canvas);
             } else if (gstate > 2) {

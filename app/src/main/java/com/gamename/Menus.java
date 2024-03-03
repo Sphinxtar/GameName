@@ -17,7 +17,7 @@ public class Menus {
         paint.setTextSize(textSize);
 
         buttons[0] = new mybutt();
-        buttons[0].label = "Start The Game";
+        buttons[0].label = "The Game";
         buttons[0].bounds = new Rect();
         buttons[0].bounds.left = (Wide / 4) + Left;
         buttons[0].bounds.top = ((High / 16) * space) + Top;

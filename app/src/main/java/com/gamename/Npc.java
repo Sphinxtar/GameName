@@ -159,7 +159,7 @@ public class Npc {
                     }
                 }
 
-                if (z.area.contains(b.spot.x, b.spot.y)) {
+                if (z.area.contains(b.spot.x, b.spot.y)) { // edge bounce
                     b.setSprite(z.sprite[b.state]);
                     switch (zonenum) {
                         case 5: // left vertical
@@ -195,7 +195,7 @@ public class Npc {
                             break;
                     }
                 }
-                if (b.speed > 0) {
+                if (b.speed > 0) { // adjust bot
                     switch (b.rection) {
                         case 1:
                             if ((b.spot.x - b.speed) > pf.getVportLeft())
@@ -248,6 +248,9 @@ public class Npc {
         }
     }
 
+    public void adjustbots() {
+
+    }
     public static class Zone {
         Rect area;
         int[] sprite = new int[2];
