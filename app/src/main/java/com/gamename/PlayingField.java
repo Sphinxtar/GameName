@@ -46,6 +46,10 @@ public class PlayingField {
 //        Log.i(TAG, "dport: " + dport.toString() + " vport: " + vport.toString() );
     }
 
+    public int getScaleFactor() {
+        return scalefactor;
+    }
+
     public void setVport(int left, int top, int right, int bottom) {
         vport.left = left;
         vport.top = top;

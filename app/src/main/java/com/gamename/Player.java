@@ -1,15 +1,16 @@
 package com.gamename;
 
 import android.graphics.Point;
+import android.graphics.Rect;
 
 public class Player {
-
     int sprite;
     int speed;
     int direction;
     int score;
     Point spot;
-
+    Rect[] hotz = new Rect[3];
+    int[] zsizes;
     /**
      * x is vertical y is horizontal center of player sprite
      */
@@ -20,7 +21,30 @@ public class Player {
         score = 0;
         final int x = (pf.getVport().width() / 2) + pf.getVportLeft();
         final int y = (pf.getVport().height() / 2) + pf.getVportTop();
-        spot = new Point(x,y);
+        spot = new Point(x, y);
+        zsizes = new int[] { 36 * pf.getScaleFactor(), 24 * pf.getScaleFactor(), 16 * pf.getScaleFactor() };
+        for (int i = 0; i < 3; i++) {
+            hotz[i] = new Rect();
+        }
+    }
+
+    public Rect[] getHotz() { // hot zones surround player one
+         // squish
+        hotz[0].left = spot.x - zsizes[0];
+        hotz[0].top = spot.y - zsizes[0];
+        hotz[0].right = spot.x + zsizes[0];
+        hotz[0].bottom = spot.y + zsizes[0];
+        // squished
+        hotz[1].left = spot.x - zsizes[1];
+        hotz[1].top = spot.y - zsizes[1];
+        hotz[1].right = spot.x + zsizes[1];
+        hotz[1].bottom = spot.y + zsizes[1];
+
+        hotz[2].left = spot.x - zsizes[2];
+        hotz[2].top = spot.y - zsizes[2];
+        hotz[2].right = spot.x + zsizes[2];
+        hotz[2].bottom = spot.y + zsizes[2];
+        return hotz;
     }
 
     public void adjustPlayer(PlayingField pf) {
@@ -76,38 +100,19 @@ public class Player {
         }
     }
 
-    public int getSprite() {
-        return sprite;
-    }
-
     public void setSprite(int sprite) {
         this.sprite = sprite;
     }
-
     public int getSpeed() {
         return speed;
     }
-
     public void setSpeed(int speed) {
-        if (this.speed < 0)
+        if (this.speed < 0) {
             speed = 0;
+        }
         this.speed = speed;
     }
-
-    public int getDirection() {
-        return direction;
-    }
-
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
 }

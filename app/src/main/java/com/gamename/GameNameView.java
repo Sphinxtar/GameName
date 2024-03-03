@@ -31,7 +31,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         moodmusic = new Moodmusic(context);
         racket = new Racket(getCtext());
         thread = new GameNameThread(getHolder(), this);
-        moodmusic.pausePlaying(getCtext());
+        moodmusic.pausePlaying();
         setFocusable(true);
     }
 
@@ -50,7 +50,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 player.setDirection(button);
                 if (button == 5)
                     player.setSpeed(player.getSpeed() - 1); // deceleration
-                else player.setSpeed(8);
+                else player.setSpeed(24);
             }
             else if (button == 10) //BLUE
                 player.setSprite(0);
@@ -107,7 +107,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 pix.drawCenterSprite(canvas, player.sprite, player.spot.x, player.spot.y);
                 canvas.restore();
                 player.adjustPlayer(pf);
-                npc.collisions(pf);
+                npc.collisions(pf, player.getHotz());
             } else if (gstate > 0 && gstate <= 2) {
                 p.setColor(Color.YELLOW);
                 p.setStyle(Paint.Style.FILL);

@@ -92,31 +92,93 @@ public class Npc {
         }
     }
 
-    public void collisions(PlayingField pf) {
+    public void collisions(PlayingField pf, Rect[] hotzones) {
         int zonenum = 0;
         int r;
-        for(Zone z : zones) {
-            for(Bot b : bots) {
+        for (Zone z : zones) {
+            for (Bot b : bots) {
+                if (b.getState() == 1 && b.respawn > 0)
+                    b.respawn--;
+                if (b.respawn <= 0)
+                    b.setState(0);
+                for (int i=0; i < 3; i++) { // player collision
+                    if (hotzones[i].contains(b.getSpot().x, b.getSpot().y)) {
+                        switch (i) {
+                            case 0:
+                                switch (b.getRection()) {
+                                    case 1:
+                                    case 9:                     // orange : purple
+                                        b.setSprite(b.getState() == 0 ? 14 : 18); // 45 squish
+                                        continue;
+                                    case 2:
+                                    case 8:
+                                        b.setSprite(b.getState() == 0 ? 7 : 12); // horizontal squish
+                                        continue;
+                                    case 3:
+                                    case 7:
+                                        b.setSprite(b.getState() == 0 ? 16 : 20); // 270 squish
+                                        continue;
+                                    case 4:
+                                    case 6:
+                                        b.setSprite(b.getState() == 0 ? 5 : 10); // vertical squish
+                                        continue;
+                                    default:
+                                        throw new IllegalStateException("Unexpected value: " + b.getRection());
+                                }
+                            case 1:
+                                switch (b.getRection()) {
+                                    case 1:
+                                    case 9:                     // orange : purple
+                                        b.setSprite(b.getState() == 0 ? 15 : 19); // 45 squished
+                                        continue;
+                                    case 2:
+                                    case 8:
+                                        b.setSprite(b.getState() == 0 ? 8 : 13); // horizontal squished
+                                        continue;
+                                    case 3:
+                                    case 7:
+                                        b.setSprite(b.getState() == 0  ? 17 : 21); // 270 squished
+                                        continue;
+                                    case 4:
+                                    case 6:
+                                        b.setSprite(b.getState() == 0 ? 6 : 11); // vertical squished
+                                        continue;
+                                    default:
+                                        throw new IllegalStateException("Unexpected value: " + b.rection);
+                                }
+                            case 2:
+                                if (b.getRection() < 5)
+                                    b.setRection(Dragon.getRandom(1, 4));
+                                else
+                                    b.setRection(Dragon.getRandom(6, 9));
+                                b.setState(1);
+                                b.setRespawn(900);
+                            default:
+                                break;
+                        }
+                    }
+                }
+
                 if (z.area.contains(b.spot.x, b.spot.y)) {
                     b.setSprite(z.sprite[b.state]);
-                    switch(zonenum) {
+                    switch (zonenum) {
                         case 5: // left vertical
-                            b.setRection(Dragon.getRandom(1,3) * 3);
+                            b.setRection(Dragon.getRandom(1, 3) * 3);
                             break;
                         case 6: // top horizontal
-                            b.setRection(Dragon.getRandom(7,9));
+                            b.setRection(Dragon.getRandom(7, 9));
                             break;
                         case 7: // right vertical
-                            r = Dragon.getRandom(1,3);
+                            r = Dragon.getRandom(1, 3);
                             if (r == 1)
                                 b.setRection(1);
                             else if (r == 2)
                                 b.setRection(4);
-                            else if (r == 3)
+                             else if (r == 3)
                                 b.setRection(7);
                             break;
                         case 8: // bottom horizontal
-                            b.setRection(Dragon.getRandom(1,3));
+                            b.setRection(Dragon.getRandom(1, 3));
                             break;
                         case 13: // top left corner
                             b.setRection(9);
@@ -134,7 +196,7 @@ public class Npc {
                     }
                 }
                 if (b.speed > 0) {
-                    switch (b.rection){
+                    switch (b.rection) {
                         case 1:
                             if ((b.spot.x - b.speed) > pf.getVportLeft())
                                 b.spot.x -= b.speed;
@@ -187,12 +249,8 @@ public class Npc {
     }
 
     public static class Zone {
-        public Rect area;
-        private final int[] sprite;
-        {
-            sprite = new int[2];
-        }
-
+        Rect area;
+        int[] sprite = new int[2];
     }
 
     public static class Bot {
@@ -209,32 +267,31 @@ public class Npc {
         int interval;
         int deathrattle;
 
-        public int getRespawn() { return respawn; }
+//        public int getRespawn() { return respawn; }
         public void setRespawn(int respawn) { this.respawn = respawn; }
-        public int getSpeed() { return speed; }
+//        public int getSpeed() { return speed; }
         public void setSpeed(int speed) { this.speed = speed; }
-        public int getTts() { return tts; }
+//        public int getTts() { return tts; }
         public void setTts(int tts) { this.tts = tts; }
-        public int getBirthsound() { return birthsound; }
+//        public int getBirthsound() { return birthsound; }
         public void setBirthsound(int birthsound) { this.birthsound = birthsound; }
-        public int getLifesound() { return lifesound; }
+//        public int getLifesound() { return lifesound; }
         public void setLifesound(int lifesound) { this.lifesound = lifesound; }
-        public int getInterval() { return interval; }
+//        public int getInterval() { return interval; }
         public void setInterval(int interval) { this.interval = interval; }
-        public int getDeathrattle() { return deathrattle; }
+//        public int getDeathrattle() { return deathrattle; }
         public void setDeathrattle(int deathrattle) { this.deathrattle = deathrattle; }
-        public int getSprite() { return sprite; }
+//        public int getSprite() { return sprite; }
         public void setSprite(int sprite) { this.sprite = sprite; }
         public int getRection() { return rection; }
         public void setRection(int rection) { this.rection = rection; }
         public void setType(int type) { this.type = type; }
-        public int getType() { return this.type; }
+//        public int getType() { return this.type; }
         public void setState(int state) { this.state = state; }
-        public int getState() { return this.state; }
+        public int getState() { return state; }
         public void setSpot(int x, int y){
             this.spot.x = x; this.spot.y = y;
         }
         public Point getSpot() { return this.spot; }
     }
-
 }

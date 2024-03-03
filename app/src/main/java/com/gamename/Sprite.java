@@ -6,7 +6,6 @@ package com.gamename;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +16,7 @@ import static android.graphics.BitmapFactory.decodeResource;
 import androidx.annotation.NonNull;
 
 public class Sprite {
-    private final Bitmap[] sprites = new Bitmap[23]; // array of sprites cut and scaled
-    private Rect[] bounce = new Rect[12];
+    private final Bitmap[] sprites = new Bitmap[22]; // array of sprites cut and scaled
     public Sprite( Context context, PlayingField pf ) {
         loadSprites(context, pf.scalefactor);
     }
@@ -38,9 +36,8 @@ public class Sprite {
             reader = new BufferedReader(new InputStreamReader(in));
             int spritenum = 0;
             while ((line = reader.readLine()) != null) {
-                if (line.isEmpty()) {
+                if (line.isEmpty())
                     continue;
-                }
                 words = line.split(",");
                 if (words[0].equals("q")) {
                     x = (Short.parseShort(words[1]));
@@ -60,15 +57,10 @@ public class Sprite {
             ioe.printStackTrace();
         }
     }
-/*
-    public void drawSprite(@NonNull Canvas canvas, int sprite, int column, int row ) {
-        canvas.drawBitmap(sprites[sprite], row, column, null);
-    }
-*/
+
     public void drawCenterSprite(@NonNull Canvas canvas, int sprite, int column, int row ) {
         int top = (row - (sprites[sprite].getHeight() / 2));
         int left = (column - (sprites[sprite].getWidth() / 2));
         canvas.drawBitmap(sprites[sprite], left, top, null);
     }
-
 }

@@ -8,28 +8,28 @@
 // sprite is current animation frame reference in the bitmap array
 // sounds values are indexes into the virtual harmonica - interval is pause between repeat
 // example:
-// n:type:state:x,y  :rection:speed:tts:respawn:sprite:birthsound:lifesound,interval:deathrattle:
-// n:0   :0    :40,40:0      :6  :20     :4     :0         :0,20              :0          gf :
+// n :type :state :x,y   :rection:speed :tts :respawn :sprite :birthsound:lifesound,interval:deathrattle:
+// n :0    :0     :40,40 :0      :6     :20  :4       :0      :          :0,20              :0          :
 // four balls of type 0, direction 0 will be filled by random
 n:0:0:40,40:0:4:6:20:4:0:0,20:0:
 n:0:0:280,40:0:4:6:20:4:0:0,20:0:
 n:0:0:40,200:0:4:6:20:4:0:0,20:0:
 n:0:0:280,200:0:4:6:20:4:0:0,20:0:
-// zones where the sprite changes according to states orange or purple left,top,right,bottom,spritenumber,spritenumber"
+:x
 z:20:20:300:220:4:9:     // 0 center field, round
-z:8:20:20:220:7:13:      // 1 left horizontal squish
-z:20:8:300:20:5:11:      // 2 top vertical squish
-z:300:20:312:220:7:13:   // 3 right horizontal squish
-z:20:220:300:232:5:11:   // 4 bottom vertical squish
-z:0:8:8:232:8:14:        // 5 left horizontal squished
-z:8:0:312:8:6:12:        // 6 top vertical squished
-z:312:8:320:232:8:14:    // 7 right horizontal squished
-z:8:232:312:240:6:12:    // 8 bottom vertical squished
-z:8:8:20:20:15:19:       // 9 top left corner 45 squish
-z:300:8:312:20:17:21:    // 10 top right corner squish 270 squish
-z:300:220:312:232:15:19: // 11 bottom right corner 45 squish
-z:8:220:20:232:17:21:    // 12 bottom left corner squish 270 squish
-z:0:0:8:8:16:20:         // 13 top left corner 45 squished
-z:312:0:320:8:18:22:     // 14 top right corner 270 squished
-z:312:232:320:240:16:20: // 15 bottom right corner 45 squished
-z:0:232:8:240:18:22:     // 16 bottom left corner 270 squished
+z:8:20:20:220:7:12:      // 1 left horizontal squish
+z:20:8:300:20:5:10:      // 2 top vertical squish
+z:300:20:312:220:7:12:   // 3 right horizontal squish
+z:20:220:300:232:5:10:   // 4 bottom vertical squish
+z:0:8:8:232:8:13:        // 5 left horizontal squished
+z:8:0:312:8:6:11:        // 6 top vertical squished
+z:312:8:320:232:8:13:    // 7 right horizontal squished
+z:8:232:312:240:6:11:    // 8 bottom vertical squished
+z:8:8:20:20:14:18:       // 9 top left corner 45 squish
+z:300:8:312:20:16:20:    // 10 top right corner squish 270 squish
+z:300:220:312:232:14:18: // 11 bottom right corner 45 squish
+z:8:220:20:232:16:20:    // 12 bottom left corner squish 270 squish
+z:0:0:8:8:15:19:         // 13 top left corner 45 squished
+z:312:0:320:8:17:21:     // 14 top right corner 270 squished
+z:312:232:320:240:15:19: // 15 bottom right corner 45 squished
+z:0:232:8:240:17:21:     // 16 bottom left corner 270 squished

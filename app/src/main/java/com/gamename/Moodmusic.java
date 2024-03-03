@@ -9,10 +9,10 @@ public class Moodmusic {
     public Moodmusic(Context context) {
         mediaplayer = MediaPlayer.create(context, R.raw.moodmusic);
         mediaplayer.setLooping(true);
-        startPlaying(context);
+        startPlaying();
     }
 
-    public void startPlaying(Context context){
+    public void startPlaying(){
         mediaplayer.start(); // no need to call prepare(); create() does that for you
     }
 
@@ -22,11 +22,11 @@ public class Moodmusic {
         }
     }
 
-    public void pausePlaying(Context context){
+    public void pausePlaying(){
         if (mediaplayer != null && mediaplayer.isPlaying())
             mediaplayer.pause();
         else
-            startPlaying(context);
+            startPlaying();
     }
 
     protected void onDestroy() {
