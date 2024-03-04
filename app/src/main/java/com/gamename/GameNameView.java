@@ -50,7 +50,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
                 player.setDirection(button);
                 if (button == 5)
                     player.setSpeed(player.getSpeed() - 1); // deceleration
-                else player.setSpeed(24);
+                else player.setSpeed(4 * pf.getScaleFactor());
             }
             else if (button == 10) //BLUE
                 player.setSprite(0);
