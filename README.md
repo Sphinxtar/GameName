@@ -1,6 +1,5 @@
 # GameName
-Basic Hello World Android Game Framework by Linus Sphinx
-
+Basic Hello World Android Game Framework
 git clone git@github.com:Sphinxtar/GameName.git<br/>
 cd GameName<br/>
 ./changeGameName.sh BikerBrawl or what ever you want to name your new game project<br/>
