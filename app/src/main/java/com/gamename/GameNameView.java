@@ -44,12 +44,24 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int newstate = 0;
+        int eventAction = event.getAction();
+        boolean retval = super.onTouchEvent(event);
         if (gstate == 0) {  // playing the game
             int button = dpad.hitButton(event);
             if (button > 0 && button < 10) { // dpad hit
+                switch (eventAction) {
+                    case MotionEvent.ACTION_UP:
+                        button = 5;
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                           retval = true;
+                        break;
+                    default:
+                        break;
+                }
                 player.setDirection(button);
                 if (button == 5)
-                    player.setSpeed(player.getSpeed() - 1); // deceleration
+                    player.setSpeed(0); // deceleration
                 else player.setSpeed(4 * pf.getScaleFactor());
             }
             else if (button == 10) //BLUE
@@ -77,7 +89,7 @@ public class GameNameView extends SurfaceView implements SurfaceHolder.Callback 
         } else {
             gstate = newstate;
         }
-        return super.onTouchEvent(event);
+        return retval;
     }
 
     @Override
