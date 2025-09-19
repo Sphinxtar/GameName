@@ -17,5 +17,6 @@ slide item to the value you want gstate changed to by tapping it or one of it's 
 That is how to chain menus or help screens together.<br/>
 It starts with gstate=2 for the splash screen and on tap changes to 
 gstate=1 to switch to the main menu.
+
 Proof Of Concept: 
 https://github.com/Sphinxtar/AtomSmasher/
